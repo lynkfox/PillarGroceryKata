@@ -10,18 +10,18 @@ namespace PillarGroceryStoreKata
         [ClassInitialize]
         public static void TestFixtureSetup(TestContext context)
         {
-            ItemRepository groceryStoreItems = new ItemRepository();
-            groceryStoreItems.Add("GroundBeef", 1.99, 1);
-            groceryStoreItems.Add("Milk", 2.49);
-            groceryStoreItems.Add("TomatoSoup", .49);
-            groceryStoreItems.Add("RotiniPasta", 5.95);
-            groceryStoreItems.Add("Onions", 1.39);
-            groceryStoreItems.Add("Salmon", 9.99, 1);
+            ItemRepository ItemRepository = new ItemRepository();
+            ItemRepository.Add("GroundBeef", 1.99, 1);
+            ItemRepository.Add("Milk", 2.49);
+            ItemRepository.Add("TomatoSoup", .49);
+            ItemRepository.Add("RotiniPasta", 5.95);
+            ItemRepository.Add("Onions", 1.39);
+            ItemRepository.Add("Salmon", 9.99, 1);
 
-            groceryStoreItems.Markdown("Milk", .49);
-            groceryStoreItems.BuyNumberGetNumberFreeLimitNumber("TomatoSoup", 2, 1, 6);
-            groceryStoreItems.BuyNumberGetNumberAtDiscountPercentLimitNumber("Milk", 1, 1, .25, 2);
-            groceryStoreItems.BuyNumberGetDiscountPercentOnEqualOrLesser("GroundBeef", 2, .5);
+            ItemRepository.Markdown("Milk", .49);
+            ItemRepository.BuyNumberGetNumberFreeLimitNumber("TomatoSoup", 2, 1, 6);
+            ItemRepository.BuyNumberGetNumberAtDiscountPercentLimitNumber("Milk", 1, 1, .25, 2);
+            ItemRepository.BuyNumberGetDiscountPercentOnEqualOrLesser("GroundBeef", 2, .5);
         }
         
         public Receipt Setup()
@@ -49,7 +49,7 @@ namespace PillarGroceryStoreKata
             double expectedTotal = 44.62;
             int expectedNumberOfItems = 11; //Ground Beef and Salmon only count as 1 each
             string expectedLastItem = "Milk";
-
+            
             Assert.AreEqual(expectedTotal, receipt.Total);
             Assert.AreEqual(expectedNumberOfItems, receipt.NumberOfItems);
             Assert.AreEqual(expectedLastItem, receipt.LastItem());

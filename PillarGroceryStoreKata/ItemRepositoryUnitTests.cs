@@ -3,11 +3,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace PillarGroceryStoreKata
 {
     [TestClass]
-    public class UnitTests
+    public class ItemRepositoryUnitTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void RepositoryCanAddBasicItemWithPrice()
         {
+
         }
     }
 }
