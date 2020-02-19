@@ -7,9 +7,11 @@ namespace PillarGroceryStoreKata
     public class IntegrationTests
 
     {
-        [ClassInitialize]
-        public static void TestFixtureSetup(TestContext context)
+      
+        
+        public Receipt Setup()
         {
+            var ItemRepository = new ItemRepository();
             ItemRepository.Add("GroundBeef", 1.99, 1);
             ItemRepository.Add("Milk", 2.49);
             ItemRepository.Add("TomatoSoup", .49);
@@ -21,10 +23,8 @@ namespace PillarGroceryStoreKata
             ItemRepository.BuyNumberGetNumberFreeLimitNumber("TomatoSoup", 2, 1, 6);
             ItemRepository.BuyNumberGetNumberAtDiscountPercentLimitNumber("Milk", 1, 1, .25, 2);
             ItemRepository.BuyNumberGetDiscountPercentOnEqualOrLesser("GroundBeef", 2, .5);
-        }
-        
-        public Receipt Setup()
-        {
+
+
             var receiptBeingTested = new Receipt();
             receiptBeingTested.Buy("RotiniPasta", 1); //+5.95
             receiptBeingTested.Buy("TomatoSoup"); //+.49
