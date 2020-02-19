@@ -10,11 +10,24 @@ namespace PillarGroceryStoreKata
         [TestMethod]
         public void WhenItemAddedToRepositoryCollectionGrowsBy1()
         {
-            var ItemRepository = new ItemRepository();
+            var itemRepository = new ItemRepository();
   
-            ItemRepository.Add("TomatoSoup", .49);
+            itemRepository.Add("TomatoSoup", .49);
 
-            Assert.AreEqual(1, ItemRepository.Count);
+            Assert.AreEqual(1, itemRepository.Count);
+        }
+
+        [TestMethod]
+        public void ItemAddedToRepositoryCanBeRecalledForPriceCheck()
+        {
+            var itemRepository = new ItemRepository();
+            double expectedPrice = .49;
+
+            itemRepository.Add("TomatoSoup", .49);
+
+            Assert.AreEqual(expectedPrice, itemRepository.PriceCheck("TomatoSoup"));
+
+            
         }
     }
 }

@@ -29,6 +29,11 @@ namespace GroceryStoreReceiptLibrary
             throw new NotImplementedException();
         }
 
+        public double PriceCheck(string v)
+        {
+            throw new NotImplementedException();
+        }
+
         public void BuyNumberGetNumberAtDiscountPercentLimitNumber(string itemName, int numberNeedToBuy, int numberToReceiveDiscount, double discountInPercentage, int LimitOnDealTotalItems)
         {
             throw new NotImplementedException();
