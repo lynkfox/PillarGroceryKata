@@ -10,7 +10,6 @@ namespace PillarGroceryStoreKata
         [ClassInitialize]
         public static void TestFixtureSetup(TestContext context)
         {
-            ItemRepository ItemRepository = new ItemRepository();
             ItemRepository.Add("GroundBeef", 1.99, 1);
             ItemRepository.Add("Milk", 2.49);
             ItemRepository.Add("TomatoSoup", .49);

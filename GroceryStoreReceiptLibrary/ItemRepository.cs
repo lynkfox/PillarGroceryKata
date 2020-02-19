@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace GroceryStoreReceiptLibrary
 {
     public static class ItemRepository
     {
+        public static int Count { get; set; }
+
+
+        
         public static void Add(string itemName, double price, int perUnit)
         {
             throw new NotImplementedException();
@@ -11,7 +16,7 @@ namespace GroceryStoreReceiptLibrary
 
         public static void Add(string itemName, double price)
         {
-            throw new NotImplementedException();
+            Count++;
         }
 
         public static void Markdown(string itemName, double priceToMarkdownInDollars)

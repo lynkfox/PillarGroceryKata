@@ -1,3 +1,4 @@
+using GroceryStoreReceiptLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace PillarGroceryStoreKata
@@ -6,9 +7,11 @@ namespace PillarGroceryStoreKata
     public class ItemRepositoryUnitTests
     {
         [TestMethod]
-        public void RepositoryCanAddBasicItemWithPrice()
+        public void WhenItemAddedToRepositoryCollectionGrowsBy1()
         {
+            ItemRepository.Add("TomatoSoup", .49);
 
+            Assert.AreEqual(1, ItemRepository.Count);
         }
     }
 }
