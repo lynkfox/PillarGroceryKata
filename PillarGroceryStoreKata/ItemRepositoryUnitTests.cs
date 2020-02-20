@@ -43,5 +43,17 @@ namespace PillarGroceryStoreKata
             Assert.AreEqual(expectedItemCount, itemRepository.Count);
             
         }
+
+        [TestMethod]
+        public void MarkdownCausesPriceCheckToReturnPriceAsChangedByMarkdownAmount()
+        {
+            var itemRepository = new ItemRepository();
+            double expectedPrice = 2;
+
+            itemRepository.Add("Milk", 2.49);
+            itemRepository.Markdown("Milk", .49);
+
+            Assert.AreEqual(expectedPrice, itemRepository.PriceCheck("Milk"));
+        }
     }
 }
