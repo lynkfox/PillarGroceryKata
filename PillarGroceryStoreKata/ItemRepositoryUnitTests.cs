@@ -27,6 +27,20 @@ namespace PillarGroceryStoreKata
 
             Assert.AreEqual(expectedPrice, itemRepository.PriceCheck("TomatoSoup"));
 
+        }
+
+        [TestMethod]
+        public void ItemAddedTwiceUpdatesToNewPriceAndDoesNotAddASecondItem()
+        {
+            var itemRepository = new ItemRepository();
+            double expectedPrice = 1.49;
+            int expectedItemCount = 1;
+
+            itemRepository.Add("TomatoSoup", .49);
+            itemRepository.Add("TomatoSoup", 1.49);
+
+            Assert.AreEqual(expectedPrice, itemRepository.PriceCheck("TomatoSoup"));
+            Assert.AreEqual(expectedItemCount, itemRepository.Count);
             
         }
     }
