@@ -20,9 +20,15 @@ namespace GroceryStoreReceiptLibrary
 
         public void Add(string itemName, double price)
         {
+            if(!Items.Any(x=>x.Name == itemName))
+            {
+                Items.Add(new Item(itemName, price));
+                Count = Items.Count;
+            }else
+            {
+                Items.Where(x => x.Name == itemName).FirstOrDefault().Price = price;
+            }
             
-            Items.Add(new Item(itemName, price));
-            Count = Items.Count;
         }
 
         public double PriceCheck(string itemName)
