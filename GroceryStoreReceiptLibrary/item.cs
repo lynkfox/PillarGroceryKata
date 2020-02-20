@@ -11,7 +11,8 @@ namespace GroceryStoreReceiptLibrary
 
         public Item(string itemName, double itemPrice)
         {
-
+            Name = itemName;
+            Price = itemPrice;
         }
     }
 }
