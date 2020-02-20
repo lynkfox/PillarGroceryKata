@@ -9,9 +9,11 @@ namespace GroceryStoreReceiptLibrary
         public double Total { get; set; }
         public int NumberOfItems { get; set; }
 
+
+
         public void Buy(string itemName)
         {
-            throw new NotImplementedException();
+            NumberOfItems++;
         }
         public void Buy(string itemName, int itemQuantity)
         {

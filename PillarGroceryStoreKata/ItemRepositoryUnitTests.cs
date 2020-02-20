@@ -6,12 +6,11 @@ namespace PillarGroceryStoreKata
     [TestClass]
     public class ItemRepositoryUnitTests
     {
-        
         [TestMethod]
         public void WhenItemAddedToRepositoryCollectionGrowsBy1()
         {
             var itemRepository = new ItemRepository();
-  
+
             itemRepository.Add("TomatoSoup", .49);
 
             Assert.AreEqual(1, itemRepository.Count);
@@ -26,7 +25,6 @@ namespace PillarGroceryStoreKata
             itemRepository.Add("TomatoSoup", .49);
 
             Assert.AreEqual(expectedPrice, itemRepository.PriceCheck("TomatoSoup"));
-
         }
 
         [TestMethod]
@@ -41,7 +39,6 @@ namespace PillarGroceryStoreKata
 
             Assert.AreEqual(expectedPrice, itemRepository.PriceCheck("TomatoSoup"));
             Assert.AreEqual(expectedItemCount, itemRepository.Count);
-            
         }
 
         [TestMethod]
@@ -55,5 +52,7 @@ namespace PillarGroceryStoreKata
 
             Assert.AreEqual(expectedPrice, itemRepository.PriceCheck("Milk"));
         }
+
+        
     }
 }
