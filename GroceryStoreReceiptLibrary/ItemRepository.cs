@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GroceryStoreReceiptLibrary
 {
     public class ItemRepository
     {
         public int Count { get; set; }
+
+
+        private List<Item> Items = new List<Item>();
 
 
         
@@ -16,7 +20,15 @@ namespace GroceryStoreReceiptLibrary
 
         public void Add(string itemName, double price)
         {
-            Count++;
+            
+            Items.Add(new Item(itemName, price));
+            Count = Items.Count;
+        }
+
+        public double PriceCheck(string itemName)
+        {
+            return Items.Where(x => x.Name == itemName).Select(x => x.Price).FirstOrDefault();
+            
         }
 
         public void Markdown(string itemName, double priceToMarkdownInDollars)
@@ -29,10 +41,7 @@ namespace GroceryStoreReceiptLibrary
             throw new NotImplementedException();
         }
 
-        public double PriceCheck(string v)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public void BuyNumberGetNumberAtDiscountPercentLimitNumber(string itemName, int numberNeedToBuy, int numberToReceiveDiscount, double discountInPercentage, int LimitOnDealTotalItems)
         {
