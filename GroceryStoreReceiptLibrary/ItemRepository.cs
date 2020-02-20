@@ -33,13 +33,13 @@ namespace GroceryStoreReceiptLibrary
 
         public double PriceCheck(string itemName)
         {
-            return Items.Where(x => x.Name == itemName).Select(x => x.Price).FirstOrDefault();
-            
+
+            return Items.Where(x => x.Name == itemName).Select(x => x.Price-x.PriceMarkDown).FirstOrDefault();
         }
 
         public void Markdown(string itemName, double priceToMarkdownInDollars)
         {
-            throw new NotImplementedException();
+            Items.Where(x => x.Name == itemName).FirstOrDefault().PriceMarkDown = priceToMarkdownInDollars;
         }
 
         public void BuyNumberGetNumberFreeLimitNumber(string itemName, int numberNeedToBuy, int numberReceivedFree, int LimitOnDealTotalItems)
