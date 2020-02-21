@@ -34,9 +34,10 @@ namespace GroceryStoreReceiptLibrary
             {
                 throw new ItemNotFound();
             }
-            var price = Math.Round(PriceList.PriceCheck(itemName), 2);
+
+            var priceAdjustedForSale = Math.Round(PriceList.PriceCheck(itemName), 2);
             
-            ItemsOnReceipt.Add(new Item(itemName, price));
+            ItemsOnReceipt.Add(new Item(itemName, priceAdjustedForSale));
         }
         public void Buy(string itemName, int itemQuantity)
         {

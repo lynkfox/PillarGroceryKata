@@ -71,6 +71,14 @@ namespace PillarGroceryStoreKata
         }
 
         [TestMethod]
+        public void BuyWithQuantityOfItemThatDoesNotExistThrowsException()
+        {
+            var testReceipt = SetupReceipt();
+
+            Assert.ThrowsException<ItemNotFound>(() => testReceipt.Buy("JunkFood", 3));
+        }
+
+        [TestMethod]
         public void BuyAnItemThatDoesntExistReturnsAnItemNotFoundException()
         {
             var testReceipt = SetupReceipt();
