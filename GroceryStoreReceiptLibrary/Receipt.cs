@@ -50,7 +50,11 @@ namespace GroceryStoreReceiptLibrary
 
         public void Void(string itemName)
         {
-            var itemToBeRemoved = ItemsOnReceipt.Where(x => x.Name == itemName).Last();
+            var itemToBeRemoved = ItemsOnReceipt.Where(x => x.Name == itemName).LastOrDefault();
+            if(itemToBeRemoved is null)
+            {
+                throw new ItemNotFound();
+            }
             Total -= itemToBeRemoved.Price;
             ItemsOnReceipt.Remove(itemToBeRemoved);
             NumberOfItems = ItemsOnReceipt.Count();

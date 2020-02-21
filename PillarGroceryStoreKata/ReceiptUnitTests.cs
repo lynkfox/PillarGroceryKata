@@ -169,9 +169,6 @@ namespace PillarGroceryStoreKata
             testReceipt.Buy("Rotini");
             testReceipt.Buy("Milk");
 
-
-
-
             Assert.ThrowsException<ItemNotFound>(() => testReceipt.Void("JunkFood"));
         }
     }
