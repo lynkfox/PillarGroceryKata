@@ -9,7 +9,8 @@ namespace PillarGroceryStoreKata
         [TestMethod]
         public void AnItemHasANameAndAPrice()
         {
-            var testItem = new Item("GroundBeef", 1.99);
+            decimal price = 1.99m;
+            var testItem = new Item("GroundBeef", price);
 
             string expectedName = "GroundBeef";
             double expectedPrice = 1.99;

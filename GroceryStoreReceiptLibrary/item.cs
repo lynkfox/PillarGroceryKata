@@ -7,11 +7,11 @@ namespace GroceryStoreReceiptLibrary
     public class Item
     {
         public string Name { get; set; }
-        public double Price { get; set; }
+        public decimal Price { get; set; }
 
-        public double PriceMarkDown { get; set; }
+        public decimal PriceMarkDown { get; set; }
 
-        public Item(string itemName, double itemPrice)
+        public Item(string itemName, decimal itemPrice)
         {
             Name = itemName;
             Price = itemPrice;

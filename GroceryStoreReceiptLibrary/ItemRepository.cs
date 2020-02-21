@@ -20,18 +20,19 @@ namespace GroceryStoreReceiptLibrary
 
         public void Add(string itemName, double price)
         {
+            decimal precisePrice = Convert.ToDecimal(price);
             if(!Items.Any(x=>x.Name == itemName))
             {
-                Items.Add(new Item(itemName, price));
+                Items.Add(new Item(itemName, precisePrice));
                 Count = Items.Count;
             }else
             {
-                Items.Where(x => x.Name == itemName).FirstOrDefault().Price = price;
+                Items.Where(x => x.Name == itemName).FirstOrDefault().Price = precisePrice;
             }
             
         }
 
-        public double PriceCheck(string itemName)
+        public decimal PriceCheck(string itemName)
         {
 
             return Items.Where(x => x.Name == itemName).Select(x => x.Price-x.PriceMarkDown).FirstOrDefault();
@@ -39,7 +40,7 @@ namespace GroceryStoreReceiptLibrary
 
         public void Markdown(string itemName, double priceToMarkdownInDollars)
         {
-            Items.Where(x => x.Name == itemName).FirstOrDefault().PriceMarkDown = priceToMarkdownInDollars;
+            Items.Where(x => x.Name == itemName).FirstOrDefault().PriceMarkDown = Convert.ToDecimal(priceToMarkdownInDollars);
         }
 
         public void BuyNumberGetNumberFreeLimitNumber(string itemName, int numberNeedToBuy, int numberReceivedFree, int LimitOnDealTotalItems)

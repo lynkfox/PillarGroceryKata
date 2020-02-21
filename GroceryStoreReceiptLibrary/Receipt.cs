@@ -14,7 +14,7 @@ namespace GroceryStoreReceiptLibrary
             PriceList = itemRepository;
         }
 
-        public double Total { get; set; }
+        public decimal Total { get; set; }
         public int NumberOfItems { get; set; }
 
 
@@ -22,11 +22,14 @@ namespace GroceryStoreReceiptLibrary
         public void Buy(string itemName)
         {
             NumberOfItems++;
-            Total += PriceList.PriceCheck(itemName);
+            Total += Math.Round(PriceList.PriceCheck(itemName),2);
         }
         public void Buy(string itemName, int itemQuantity)
         {
-            throw new NotImplementedException();
+            for(int i=0; i < itemQuantity; i++)
+            {
+                Buy(itemName);
+            }
         }
 
         public void Void(string itemName)
