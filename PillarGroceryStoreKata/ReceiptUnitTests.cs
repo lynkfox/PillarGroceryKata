@@ -112,6 +112,23 @@ namespace PillarGroceryStoreKata
         }
 
         [TestMethod]
+        public void ParamterlessVoidAdjustsPriceAndTotalItems()
+        {
+            var testReceipt = SetupReceipt();
+            testReceipt.Buy("Milk");
+            testReceipt.Buy("Rotini");
+            testReceipt.Buy("TomatoSoup");
+
+            decimal expectedTotal = 7.98m;
+            int expectedItemCount = 2;
+
+            testReceipt.Void();
+
+            Assert.AreEqual(expectedTotal, testReceipt.Total);
+            Assert.AreEqual(expectedItemCount, testReceipt.NumberOfItems);
+        }
+
+        [TestMethod]
         public void VoidWithAnItemNameRemovesTheLastEntryOfThatItemInReceipt()
         {
             var testReceipt = SetupReceipt();
