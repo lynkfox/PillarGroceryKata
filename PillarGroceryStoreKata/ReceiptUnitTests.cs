@@ -181,7 +181,7 @@ namespace PillarGroceryStoreKata
         }
 
         [TestMethod]
-        public void VoidForItemWithQuanttyRemovesTheAppropriateNumberOfItemsFromReceipt()
+        public void VoidForItemWithQuantityRemovesTheAppropriateNumberOfItemsFromReceipt()
         {
             var testReceipt = SetupReceipt();
             testReceipt.Buy("Milk", 5);

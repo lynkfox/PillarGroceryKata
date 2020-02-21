@@ -68,7 +68,10 @@ namespace GroceryStoreReceiptLibrary
 
         public void Void(string itemName, int itemQuantity)
         {
-            throw new NotImplementedException();
+            for(int i=0; i<itemQuantity; i++)
+            {
+                Void(itemName);
+            }
         }
 
         public Item LastItem()
