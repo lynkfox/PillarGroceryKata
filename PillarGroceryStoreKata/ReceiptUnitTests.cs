@@ -6,14 +6,19 @@ namespace PillarGroceryStoreKata
     [TestClass]
     public class ReceiptUnitTests
     {
+        public Receipt SetupReceipt()
+        {
+            var testItemRepository = new ItemRepository();
+            testItemRepository.Add("Milk", 2.49);
+            testItemRepository.Add("Rotini", 5.49);
+
+            return new Receipt(testItemRepository);
+        }
         [TestMethod]
         public void BuyIncreasesTheNumberOfItemsOnAReceipt()
         {
+            var testReceipt = SetupReceipt();
             
-            var itemRepository = new ItemRepository();
-            itemRepository.Add("Milk", 2.49);
-
-            var testReceipt = new Receipt(itemRepository);
             int expectedTotalItems = 2;
 
             testReceipt.Buy("Milk");
@@ -26,9 +31,7 @@ namespace PillarGroceryStoreKata
         [TestMethod]
         public void BuyIncreasesTotalByPriceOfItemOnReceipt()
         {
-            var itemRepository = new ItemRepository();
-            itemRepository.Add("Milk", 2.49);
-            var testReceipt = new Receipt(itemRepository);
+            var testReceipt = SetupReceipt();
 
             double expectedTotal = 2.49;
 
@@ -40,11 +43,8 @@ namespace PillarGroceryStoreKata
         [TestMethod]
         public void BuyWithMultipleItemsOfDifferentPriceGivesProperTotalAndItemCount()
         {
-            var itemRepository = new ItemRepository();
-            itemRepository.Add("Milk", 2.49);
-            itemRepository.Add("Rotini", 5.49);
-            var testReceipt = new Receipt(itemRepository);
-            
+            var testReceipt = SetupReceipt();
+
             double expectedTotal = 7.98;
             int expectedItemCount = 2;
 
