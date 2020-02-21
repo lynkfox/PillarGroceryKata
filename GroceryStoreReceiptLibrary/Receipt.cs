@@ -45,7 +45,7 @@ namespace GroceryStoreReceiptLibrary
 
         public void Void()
         {
-            ItemsOnReceipt.Remove(ItemsOnReceipt.Last());
+            Void(ItemsOnReceipt.Last().Name);
         }
 
         public void Void(string itemName)
