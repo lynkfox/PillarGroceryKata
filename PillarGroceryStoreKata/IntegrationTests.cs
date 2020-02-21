@@ -45,11 +45,11 @@ namespace PillarGroceryStoreKata
         {
             var receipt = Setup();
 
-            double expectedTotal = 44.62;
+            decimal expectedTotal = 44.62m;
             int expectedNumberOfItems = 11; //Ground Beef and Salmon only count as 1 each
             string expectedLastItem = "Milk";
             
-            Assert.AreEqual(expectedTotal, receipt.Total);
+            Assert.AreEqual(expectedTotal, receipt.Total());
             Assert.AreEqual(expectedNumberOfItems, receipt.ItemCount());
             Assert.AreEqual(expectedLastItem, receipt.LastItem().Name);
 

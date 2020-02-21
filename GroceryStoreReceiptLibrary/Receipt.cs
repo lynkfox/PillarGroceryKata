@@ -15,12 +15,16 @@ namespace GroceryStoreReceiptLibrary
             PriceList = itemRepository;
         }
 
-        public decimal Total { get; set; }
 
        
         public int ItemCount()
         {
             return ItemsOnReceipt.Count();
+        }
+
+        public decimal Total()
+        {
+            return ItemsOnReceipt.Select(x => x.Price).Sum();
         }
 
 
@@ -32,7 +36,6 @@ namespace GroceryStoreReceiptLibrary
             }
             var price = Math.Round(PriceList.PriceCheck(itemName), 2);
             
-            Total += price;
             ItemsOnReceipt.Add(new Item(itemName, price));
         }
         public void Buy(string itemName, int itemQuantity)
@@ -55,7 +58,7 @@ namespace GroceryStoreReceiptLibrary
             {
                 throw new ItemNotFound();
             }
-            Total -= itemToBeRemoved.Price;
+
             ItemsOnReceipt.Remove(itemToBeRemoved);
 
         }
