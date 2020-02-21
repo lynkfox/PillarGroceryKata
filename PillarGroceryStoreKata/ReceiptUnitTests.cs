@@ -70,7 +70,7 @@ namespace PillarGroceryStoreKata
         }
 
         [TestMethod]
-        public void BuyAnItemThatDoesntExistReturnsAnException()
+        public void BuyAnItemThatDoesntExistReturnsAnItemNotFoundException()
         {
             var testReceipt = SetupReceipt();
 

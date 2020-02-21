@@ -21,6 +21,11 @@ namespace GroceryStoreReceiptLibrary
 
         public void Buy(string itemName)
         {
+            if(!PriceList.DoesItemExist(itemName))
+            {
+                throw new ItemNotFound();
+            }
+
             NumberOfItems++;
             Total += Math.Round(PriceList.PriceCheck(itemName),2);
         }

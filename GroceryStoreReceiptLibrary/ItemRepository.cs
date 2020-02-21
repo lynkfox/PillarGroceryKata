@@ -32,6 +32,11 @@ namespace GroceryStoreReceiptLibrary
             
         }
 
+        internal bool DoesItemExist(string itemName)
+        {
+            return Items.Any(x => x.Name == itemName);
+        }
+
         public decimal PriceCheck(string itemName)
         {
 
