@@ -25,7 +25,7 @@ namespace PillarGroceryStoreKata
             testReceipt.Buy("Milk");
             testReceipt.Buy("Milk");
 
-            Assert.AreEqual(expectedTotalItems, testReceipt.NumberOfItems);
+            Assert.AreEqual(expectedTotalItems, testReceipt.ItemCount());
 
         }
 
@@ -53,7 +53,7 @@ namespace PillarGroceryStoreKata
             testReceipt.Buy("Rotini");
 
             Assert.AreEqual(expectedTotal, testReceipt.Total);
-            Assert.AreEqual(expectedItemCount, testReceipt.NumberOfItems);
+            Assert.AreEqual(expectedItemCount, testReceipt.ItemCount());
 
         }
 
@@ -67,7 +67,7 @@ namespace PillarGroceryStoreKata
             testReceipt.Buy("Milk", 3);
 
             Assert.AreEqual(expectedTotal, testReceipt.Total);
-            Assert.AreEqual(expectedItemCount, testReceipt.NumberOfItems);
+            Assert.AreEqual(expectedItemCount, testReceipt.ItemCount());
         }
 
         [TestMethod]
@@ -125,7 +125,7 @@ namespace PillarGroceryStoreKata
             testReceipt.Void();
 
             Assert.AreEqual(expectedTotal, testReceipt.Total);
-            Assert.AreEqual(expectedItemCount, testReceipt.NumberOfItems);
+            Assert.AreEqual(expectedItemCount, testReceipt.ItemCount());
         }
 
         [TestMethod]
@@ -157,7 +157,7 @@ namespace PillarGroceryStoreKata
             testReceipt.Void("Rotini");
 
             Assert.AreEqual(expectedTotal, testReceipt.Total);
-            Assert.AreEqual(expectedItemCount, testReceipt.NumberOfItems);
+            Assert.AreEqual(expectedItemCount, testReceipt.ItemCount());
 
         }
 

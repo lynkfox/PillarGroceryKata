@@ -50,7 +50,7 @@ namespace PillarGroceryStoreKata
             string expectedLastItem = "Milk";
             
             Assert.AreEqual(expectedTotal, receipt.Total);
-            Assert.AreEqual(expectedNumberOfItems, receipt.NumberOfItems);
+            Assert.AreEqual(expectedNumberOfItems, receipt.ItemCount());
             Assert.AreEqual(expectedLastItem, receipt.LastItem().Name);
 
         }
