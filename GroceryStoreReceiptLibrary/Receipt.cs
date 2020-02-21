@@ -59,5 +59,10 @@ namespace GroceryStoreReceiptLibrary
         {
             return ItemsOnReceipt.Peek();
         }
+
+        public void Void()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
