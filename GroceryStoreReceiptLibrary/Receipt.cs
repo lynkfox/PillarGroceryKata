@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace GroceryStoreReceiptLibrary
 {
     public class Receipt
     {
-        private ItemRepository priceList;
+        private ItemRepository PriceList;
 
         public Receipt(ItemRepository itemRepository)
         {
-            priceList = itemRepository;
+            PriceList = itemRepository;
         }
 
         public double Total { get; set; }
@@ -21,6 +22,7 @@ namespace GroceryStoreReceiptLibrary
         public void Buy(string itemName)
         {
             NumberOfItems++;
+            Total += PriceList.PriceCheck(itemName);
         }
         public void Buy(string itemName, int itemQuantity)
         {
