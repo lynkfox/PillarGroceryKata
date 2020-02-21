@@ -6,6 +6,13 @@ namespace GroceryStoreReceiptLibrary
 {
     public class Receipt
     {
+        private ItemRepository priceList;
+
+        public Receipt(ItemRepository itemRepository)
+        {
+            priceList = itemRepository;
+        }
+
         public double Total { get; set; }
         public int NumberOfItems { get; set; }
 

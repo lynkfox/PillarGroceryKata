@@ -11,21 +11,21 @@ namespace PillarGroceryStoreKata
         
         public Receipt Setup()
         {
-            var ItemRepository = new ItemRepository();
-            ItemRepository.Add("GroundBeef", 1.99, 1);
-            ItemRepository.Add("Milk", 2.49);
-            ItemRepository.Add("TomatoSoup", .49);
-            ItemRepository.Add("RotiniPasta", 5.95);
-            ItemRepository.Add("Onions", 1.39);
-            ItemRepository.Add("Salmon", 9.99, 1);
+            var testItemRepository = new ItemRepository();
+            testItemRepository.Add("GroundBeef", 1.99, 1);
+            testItemRepository.Add("Milk", 2.49);
+            testItemRepository.Add("TomatoSoup", .49);
+            testItemRepository.Add("RotiniPasta", 5.95);
+            testItemRepository.Add("Onions", 1.39);
+            testItemRepository.Add("Salmon", 9.99, 1);
 
-            ItemRepository.Markdown("Milk", .49);
-            ItemRepository.BuyNumberGetNumberFreeLimitNumber("TomatoSoup", 2, 1, 6);
-            ItemRepository.BuyNumberGetNumberAtDiscountPercentLimitNumber("Milk", 1, 1, .25, 2);
-            ItemRepository.BuyNumberGetDiscountPercentOnEqualOrLesser("GroundBeef", 2, .5);
+            testItemRepository.Markdown("Milk", .49);
+            testItemRepository.BuyNumberGetNumberFreeLimitNumber("TomatoSoup", 2, 1, 6);
+            testItemRepository.BuyNumberGetNumberAtDiscountPercentLimitNumber("Milk", 1, 1, .25, 2);
+            testItemRepository.BuyNumberGetDiscountPercentOnEqualOrLesser("GroundBeef", 2, .5);
 
 
-            var receiptBeingTested = new Receipt();
+            var receiptBeingTested = new Receipt(testItemRepository);
             receiptBeingTested.Buy("RotiniPasta", 1); //+5.95
             receiptBeingTested.Buy("TomatoSoup"); //+.49
             receiptBeingTested.Buy("TomatoSoup"); //+.49

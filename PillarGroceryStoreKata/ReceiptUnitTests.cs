@@ -9,9 +9,11 @@ namespace PillarGroceryStoreKata
         [TestMethod]
         public void BuyIncreasesTheNumberOfItemsOnAReceipt()
         {
-            var testReceipt = new Receipt();
+            
             var itemRepository = new ItemRepository();
             itemRepository.Add("Milk", 2.49);
+
+            var testReceipt = new Receipt(itemRepository);
             int expectedTotalItems = 2;
 
             testReceipt.Buy("Milk");
@@ -19,6 +21,20 @@ namespace PillarGroceryStoreKata
 
             Assert.AreEqual(expectedTotalItems, testReceipt.NumberOfItems);
 
+        }
+
+        [TestMethod]
+        public void BuyIncreasesTotalByPriceOfItemOnReceipt()
+        {
+            var itemRepository = new ItemRepository();
+            itemRepository.Add("Milk", 2.49);
+            var testReceipt = new Receipt(itemRepository);
+
+            double expectedTotal = 2.49;
+
+            testReceipt.Buy("Milk");
+
+            Assert.AreEqual(expectedTotal, testReceipt.Total);
         }
     }
 }
