@@ -49,7 +49,7 @@ namespace GroceryStoreReceiptLibrary
             throw new NotImplementedException();
         }
 
-        public string LastItem()
+        public Item LastItem()
         {
             throw new NotImplementedException();
         }

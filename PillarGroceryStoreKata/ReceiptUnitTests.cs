@@ -11,6 +11,7 @@ namespace PillarGroceryStoreKata
             var testItemRepository = new ItemRepository();
             testItemRepository.Add("Milk", 2.49);
             testItemRepository.Add("Rotini", 5.49);
+            testItemRepository.Add("TomatoSoup", .49);
 
             return new Receipt(testItemRepository);
         }
@@ -75,6 +76,21 @@ namespace PillarGroceryStoreKata
             var testReceipt = SetupReceipt();
 
             Assert.ThrowsException<ItemNotFound>(() => testReceipt.Buy("JunkFood"));
+        }
+
+        [TestMethod]
+        public void LastItemReturnsTheNameAndPriceOftheLastItemAdded()
+        {
+            var testReceipt = SetupReceipt();
+            testReceipt.Buy("Milk");
+            testReceipt.Buy("Rotini");
+            testReceipt.Buy("TomatoSoup");
+
+            string expectedLastItem = "TomatoSoup";
+            decimal expectedLastPrice = .49m;
+
+            Assert.AreEqual(expectedLastItem, testReceipt.LastItem().Name);
+            Assert.AreEqual(expectedLastPrice, testReceipt.LastItem().Price);
         }
     }
 }

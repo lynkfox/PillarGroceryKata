@@ -51,7 +51,7 @@ namespace PillarGroceryStoreKata
             
             Assert.AreEqual(expectedTotal, receipt.Total);
             Assert.AreEqual(expectedNumberOfItems, receipt.NumberOfItems);
-            Assert.AreEqual(expectedLastItem, receipt.LastItem());
+            Assert.AreEqual(expectedLastItem, receipt.LastItem().Name);
 
         }
     }
