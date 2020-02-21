@@ -8,7 +8,7 @@ namespace GroceryStoreReceiptLibrary
     public class Receipt
     {
         private readonly ItemRepository PriceList;
-        private Stack<Item> ItemsOnReceipt = new Stack<Item>();
+        private List<Item> ItemsOnReceipt = new List<Item>();
 
         public Receipt(ItemRepository itemRepository)
         {
@@ -32,7 +32,7 @@ namespace GroceryStoreReceiptLibrary
 
             
             Total += price;
-            ItemsOnReceipt.Push(new Item(itemName, price));
+            ItemsOnReceipt.Add(new Item(itemName, price));
             NumberOfItems = ItemsOnReceipt.Count();
         }
         public void Buy(string itemName, int itemQuantity)
@@ -45,12 +45,16 @@ namespace GroceryStoreReceiptLibrary
 
         public void Void()
         {
-            ItemsOnReceipt.Pop();
+            ItemsOnReceipt.Remove(ItemsOnReceipt.Last());
         }
 
         public void Void(string itemName)
         {
-            throw new NotImplementedException();
+            var itemToBeRemoved = ItemsOnReceipt.Where(x => x.Name == itemName).Last();
+            Total -= itemToBeRemoved.Price;
+            ItemsOnReceipt.Remove(itemToBeRemoved);
+            NumberOfItems = ItemsOnReceipt.Count();
+
         }
 
         
@@ -62,7 +66,7 @@ namespace GroceryStoreReceiptLibrary
 
         public Item LastItem()
         {
-            return ItemsOnReceipt.Peek();
+            return ItemsOnReceipt.Last();
         }
 
        

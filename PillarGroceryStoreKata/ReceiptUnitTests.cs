@@ -110,5 +110,25 @@ namespace PillarGroceryStoreKata
             Assert.AreEqual(expectedLastPrice, testReceipt.LastItem().Price);
 
         }
+
+        [TestMethod]
+        public void VoidWithAnItemNameRemovesTheLastEntryOfThatItemInReceipt()
+        {
+            var testReceipt = SetupReceipt();
+            testReceipt.Buy("Milk");
+            testReceipt.Buy("Rotini");
+            testReceipt.Buy("Milk");
+
+            string expectedLastItem = "Milk";
+            int expectedItemCount = 2;
+            decimal expectedTotal = 4.98m;
+
+
+            testReceipt.Void("Rotini");
+
+            Assert.AreEqual(expectedLastItem, testReceipt.LastItem().Name);
+            Assert.AreEqual(expectedItemCount, testReceipt.NumberOfItems);
+            Assert.AreEqual(expectedTotal, testReceipt.Total);
+        }
     }
 }
