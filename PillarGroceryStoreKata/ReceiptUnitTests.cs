@@ -179,5 +179,17 @@ namespace PillarGroceryStoreKata
 
             Assert.ThrowsException<ItemNotFound>(() => testReceipt.Void("JunkFood"));
         }
+
+        [TestMethod]
+        public void VoidForItemWithQuanttyRemovesTheAppropriateNumberOfItemsFromReceipt()
+        {
+            var testReceipt = SetupReceipt();
+            testReceipt.Buy("Milk", 5);
+            int expectedNumberOfItems = 3;
+
+            testReceipt.Void("Milk", 2);
+
+            Assert.AreEqual(expectedNumberOfItems, testReceipt.ItemCount());
+        }
     }
 }
