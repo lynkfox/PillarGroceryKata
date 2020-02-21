@@ -138,8 +138,6 @@ namespace PillarGroceryStoreKata
 
             string expectedLastItem = "Milk";
 
-
-
             testReceipt.Void("Rotini");
 
             Assert.AreEqual(expectedLastItem, testReceipt.LastItem().Name);
@@ -153,16 +151,28 @@ namespace PillarGroceryStoreKata
             testReceipt.Buy("Rotini");
             testReceipt.Buy("Milk");
 
-            string expectedLastItem = "Milk";
             int expectedItemCount = 2;
             decimal expectedTotal = 4.98m;
-
 
             testReceipt.Void("Rotini");
 
             Assert.AreEqual(expectedTotal, testReceipt.Total);
             Assert.AreEqual(expectedItemCount, testReceipt.NumberOfItems);
 
+        }
+
+        [TestMethod]
+        public void VoidThrowsItemNotFoundExceptionIfGivenAnItemNotOnReceipt()
+        {
+            var testReceipt = SetupReceipt();
+            testReceipt.Buy("Milk");
+            testReceipt.Buy("Rotini");
+            testReceipt.Buy("Milk");
+
+
+
+
+            Assert.ThrowsException<ItemNotFound>(() => testReceipt.Void("JunkFood"));
         }
     }
 }
