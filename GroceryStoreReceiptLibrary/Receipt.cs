@@ -43,6 +43,11 @@ namespace GroceryStoreReceiptLibrary
             }
         }
 
+        public void Void()
+        {
+            ItemsOnReceipt.Pop();
+        }
+
         public void Void(string itemName)
         {
             throw new NotImplementedException();
@@ -60,9 +65,6 @@ namespace GroceryStoreReceiptLibrary
             return ItemsOnReceipt.Peek();
         }
 
-        public void Void()
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }
