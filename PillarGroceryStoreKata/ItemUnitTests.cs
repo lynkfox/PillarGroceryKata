@@ -13,7 +13,7 @@ namespace PillarGroceryStoreKata
             var testItem = new Item("GroundBeef", price);
 
             string expectedName = "GroundBeef";
-            double expectedPrice = 1.99;
+            decimal expectedPrice = 1.99m;
 
             Assert.AreEqual(expectedName, testItem.Name);
             Assert.AreEqual(expectedPrice, testItem.Price);

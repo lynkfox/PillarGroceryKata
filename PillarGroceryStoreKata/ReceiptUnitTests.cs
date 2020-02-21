@@ -33,7 +33,7 @@ namespace PillarGroceryStoreKata
         {
             var testReceipt = SetupReceipt();
 
-            double expectedTotal = 2.49;
+            decimal expectedTotal = 2.49m;
 
             testReceipt.Buy("Milk");
 
@@ -45,7 +45,7 @@ namespace PillarGroceryStoreKata
         {
             var testReceipt = SetupReceipt();
 
-            double expectedTotal = 7.98;
+            decimal expectedTotal = 7.98m;
             int expectedItemCount = 2;
 
             testReceipt.Buy("Milk");
@@ -60,7 +60,7 @@ namespace PillarGroceryStoreKata
         public void BuyWithQuantityProperlyAddsNumberOfItemsToReceiptAndProperTotal()
         {
             var testReceipt = SetupReceipt();
-            double expectedTotal = 6.47;
+            decimal expectedTotal = 7.47m;
             int expectedItemCount = 3;
 
             testReceipt.Buy("Milk", 3);

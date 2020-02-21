@@ -20,7 +20,7 @@ namespace PillarGroceryStoreKata
         public void ItemAddedToRepositoryCanBeRecalledForPriceCheck()
         {
             var itemRepository = new ItemRepository();
-            double expectedPrice = .49;
+            decimal expectedPrice = .49m;
 
             itemRepository.Add("TomatoSoup", .49);
 
@@ -31,7 +31,7 @@ namespace PillarGroceryStoreKata
         public void ItemAddedTwiceUpdatesToNewPriceAndDoesNotAddASecondItem()
         {
             var itemRepository = new ItemRepository();
-            double expectedPrice = 1.49;
+            decimal expectedPrice = 1.49m;
             int expectedItemCount = 1;
 
             itemRepository.Add("TomatoSoup", .49);
@@ -45,7 +45,7 @@ namespace PillarGroceryStoreKata
         public void MarkdownCausesPriceCheckToReturnPriceAsChangedByMarkdownAmount()
         {
             var itemRepository = new ItemRepository();
-            double expectedPrice = 2;
+            decimal expectedPrice = 2;
 
             itemRepository.Add("Milk", 2.49);
             itemRepository.Markdown("Milk", .49);
