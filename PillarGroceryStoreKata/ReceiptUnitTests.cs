@@ -210,5 +210,19 @@ namespace PillarGroceryStoreKata
             Assert.AreEqual(expectedItemCount, testReceipt.ItemCount());
 
         }
+
+        [TestMethod]
+        public void BuyItemsWithABOGOTypeSaleAndBuyingMoreThanTheLimitDoesNotProduceExtraFreeItems()
+        {
+            var testReceipt = SetupReceipt();
+            testReceipt.Buy("PeanutButter", 4); //1.25 each, Buy 2 get 1 free, limit 3
+            
+
+            decimal expectedTotal = 3.75m;
+            int expectedItemCount = 4;
+
+            Assert.AreEqual(expectedTotal, testReceipt.Total());
+            Assert.AreEqual(expectedItemCount, testReceipt.ItemCount());
+        }
     }
 }
