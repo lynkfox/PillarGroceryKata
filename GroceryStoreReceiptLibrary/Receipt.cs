@@ -35,23 +35,36 @@ namespace GroceryStoreReceiptLibrary
                 throw new ItemNotFound();
             }
 
-            decimal priceAdjustedForSale = 0;
+            
             var itemToBeBought = PriceList.CheckSaleInfo(itemName);
-            if (itemToBeBought.BOGOPurchasedNumber == 0)
-            {
-                priceAdjustedForSale = Math.Round(PriceList.PriceCheck(itemName), 2);
 
-            }else if(ItemsOnReceipt.Where(x => x.Name == itemName).Count() >= itemToBeBought.BOGOPurchasedNumber && ItemsOnReceipt.Where(x => x.Name == itemName).Count() < itemToBeBought.LimitNumber)
-            {
-                priceAdjustedForSale = 0;
-            } else //if BOGO is not 0 but Items Have Not Yet Reached Required Purchase Amount
-            {
-                priceAdjustedForSale = Math.Round(PriceList.PriceCheck(itemName), 2);
-            }
+            decimal priceAdjustedForSale = AdjustPriceForVariousSaleTypes(itemToBeBought);
+            
 
 
             ItemsOnReceipt.Add(new Item(itemName, priceAdjustedForSale));
         }
+
+        private decimal AdjustPriceForVariousSaleTypes(Item itemToBeBought)
+        {
+            decimal priceOfThisItem = 0;
+            if (itemToBeBought.BOGOPurchasedNumber == 0)
+            {
+                priceOfThisItem = Math.Round(PriceList.PriceCheck(itemToBeBought.Name), 2);
+
+            }
+            else if (ItemsOnReceipt.Where(x => x.Name == itemToBeBought.Name).Count() >= itemToBeBought.BOGOPurchasedNumber && ItemsOnReceipt.Where(x => x.Name == itemToBeBought.Name).Count() < itemToBeBought.LimitNumber)
+            {
+                priceOfThisItem = 0;
+            }
+            else //if BOGO is not 0 but Items Have Not Yet Reached Required Purchase Amount
+            {
+                priceOfThisItem = Math.Round(PriceList.PriceCheck(itemToBeBought.Name), 2);
+            }
+
+            return priceOfThisItem;
+        }
+
         public void Buy(string itemName, int itemQuantity)
         {
             for(int i=0; i < itemQuantity; i++)
