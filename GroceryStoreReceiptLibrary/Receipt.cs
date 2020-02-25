@@ -35,8 +35,21 @@ namespace GroceryStoreReceiptLibrary
                 throw new ItemNotFound();
             }
 
-            var priceAdjustedForSale = Math.Round(PriceList.PriceCheck(itemName), 2);
-            
+            decimal priceAdjustedForSale = 0;
+            var itemToBeBought = PriceList.CheckSaleInfo(itemName);
+            if (itemToBeBought.BOGOPurchasedNumber == 0)
+            {
+                priceAdjustedForSale = Math.Round(PriceList.PriceCheck(itemName), 2);
+
+            }else if(ItemsOnReceipt.Where(x => x.Name == itemName).Count() >= itemToBeBought.BOGOPurchasedNumber && ItemsOnReceipt.Where(x => x.Name == itemName).Count() < itemToBeBought.LimitNumber)
+            {
+                priceAdjustedForSale = 0;
+            } else //if BOGO is not 0 but Items Have Not Yet Reached Required Purchase Amount
+            {
+                priceAdjustedForSale = Math.Round(PriceList.PriceCheck(itemName), 2);
+            }
+
+
             ItemsOnReceipt.Add(new Item(itemName, priceAdjustedForSale));
         }
         public void Buy(string itemName, int itemQuantity)
