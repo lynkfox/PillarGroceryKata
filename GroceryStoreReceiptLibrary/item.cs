@@ -20,5 +20,6 @@ namespace GroceryStoreReceiptLibrary
             Name = itemName;
             Price = itemPrice;
         }
+
     }
 }

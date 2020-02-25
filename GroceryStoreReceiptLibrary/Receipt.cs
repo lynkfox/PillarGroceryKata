@@ -34,35 +34,34 @@ namespace GroceryStoreReceiptLibrary
             {
                 throw new ItemNotFound();
             }
-
             
-            var itemToBeBought = PriceList.CheckSaleInfo(itemName);
-
-            decimal priceAdjustedForSale = AdjustPriceForVariousSaleTypes(itemToBeBought);
             
-
-
-            ItemsOnReceipt.Add(new Item(itemName, priceAdjustedForSale));
+            ItemsOnReceipt.Add(new Item(itemName, AdjustPriceForVariousSaleTypes(PriceList.CheckSaleInfo(itemName))));
         }
 
         private decimal AdjustPriceForVariousSaleTypes(Item itemToBeBought)
         {
-            decimal priceOfThisItem = 0;
-            if (itemToBeBought.BOGOPurchasedNumber == 0)
+            if (itemToBeBought.BOGOPurchasedNumber != 0)
             {
-                priceOfThisItem = Math.Round(PriceList.PriceCheck(itemToBeBought.Name), 2);
-
+                return AdjustPriceForBOGOSale(itemToBeBought);
             }
-            else if (ItemsOnReceipt.Where(x => x.Name == itemToBeBought.Name).Count() >= itemToBeBought.BOGOPurchasedNumber && ItemsOnReceipt.Where(x => x.Name == itemToBeBought.Name).Count() < itemToBeBought.LimitNumber)
+            else
             {
-                priceOfThisItem = 0;
-            }
-            else //if BOGO is not 0 but Items Have Not Yet Reached Required Purchase Amount
-            {
-                priceOfThisItem = Math.Round(PriceList.PriceCheck(itemToBeBought.Name), 2);
+                return itemToBeBought.Price;
             }
 
-            return priceOfThisItem;
+        }
+
+        private decimal AdjustPriceForBOGOSale(Item itemToBeBought)
+        {
+            if (ItemsOnReceipt.Where(x => x.Name == itemToBeBought.Name).Count() >= itemToBeBought.BOGOPurchasedNumber && ItemsOnReceipt.Where(x => x.Name == itemToBeBought.Name).Count() < itemToBeBought.LimitNumber)
+            {
+                return 0;
+            }
+            else //if BOGO Items Have Not Yet Reached Required Purchase Amount
+            {
+                return itemToBeBought.Price;
+            }
         }
 
         public void Buy(string itemName, int itemQuantity)
