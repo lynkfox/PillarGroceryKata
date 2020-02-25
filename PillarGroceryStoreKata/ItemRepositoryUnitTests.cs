@@ -69,7 +69,7 @@ namespace PillarGroceryStoreKata
             itemRepository.Add("Milk", 2.49);
             itemRepository.BuyNumberGetNumberFreeLimitNumber("Milk", 2, 1, 3);
 
-            int expectedLimit = 4;
+            int expectedLimit = 3;
             int expectedRequiredToBuy = 2;
             int expectedGainedFree = 1;
 

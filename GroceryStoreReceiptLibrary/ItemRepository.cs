@@ -12,7 +12,8 @@ namespace GroceryStoreReceiptLibrary
         private List<Item> Items = new List<Item>();
 
 
-        
+        //Building and Removing Item Methods
+
         public void Add(string itemName, double price, int perUnit)
         {
             throw new NotImplementedException();
@@ -32,6 +33,8 @@ namespace GroceryStoreReceiptLibrary
             
         }
 
+        //Item Information Gathering Methods
+
         internal bool DoesItemExist(string itemName)
         {
             return Items.Any(x => x.Name == itemName);
@@ -42,6 +45,13 @@ namespace GroceryStoreReceiptLibrary
 
             return Items.Where(x => x.Name == itemName).Select(x => x.Price-x.PriceMarkDown).FirstOrDefault();
         }
+        public Item CheckSaleInfo(string itemName)
+        {
+            return Items.Where(x => x.Name == itemName).First();
+        }
+
+
+        //Sale Methods
 
         public void Markdown(string itemName, double priceToMarkdownInDollars)
         {
@@ -50,7 +60,10 @@ namespace GroceryStoreReceiptLibrary
 
         public void BuyNumberGetNumberFreeLimitNumber(string itemName, int numberNeedToBuy, int numberReceivedFree, int LimitOnDealTotalItems)
         {
-            throw new NotImplementedException();
+            Items.Where(x => x.Name == itemName).First().BOGOFreeReceivedNumber = numberReceivedFree;
+            Items.Where(x => x.Name == itemName).First().BOGOPurchasedNumber = numberNeedToBuy;
+            Items.Where(x => x.Name == itemName).First().LimitNumber = LimitOnDealTotalItems;
+
         }
 
         
@@ -65,9 +78,6 @@ namespace GroceryStoreReceiptLibrary
             throw new NotImplementedException();
         }
 
-        public Item CheckSaleInfo(string itemName)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
