@@ -62,6 +62,7 @@ namespace PillarGroceryStoreKata
             Assert.IsInstanceOfType(itemRepository.CheckSaleInfo("Milk"), typeof(Item));
         }
 
+
         [TestMethod]
         public void BuyNumberGetNumberFreeLimitNumberSetsUpTheNeededNumbers()
         {

@@ -12,6 +12,9 @@ namespace PillarGroceryStoreKata
             testItemRepository.Add("Milk", 2.49);
             testItemRepository.Add("Rotini", 5.49);
             testItemRepository.Add("TomatoSoup", .49);
+            testItemRepository.Add("PeanutButter", 1.25);
+
+            testItemRepository.BuyNumberGetNumberFreeLimitNumber("PeanutButter", 2, 1, 3);
 
             return new Receipt(testItemRepository);
         }
@@ -190,6 +193,22 @@ namespace PillarGroceryStoreKata
             testReceipt.Void("Milk", 2);
 
             Assert.AreEqual(expectedNumberOfItems, testReceipt.ItemCount());
+        }
+
+        [TestMethod]
+        public void BuyItemsWithABOGOTypeSaleWillAppropriatelyAddFreeItemsToReceipt()
+        {
+            var testReceipt = SetupReceipt();
+            testReceipt.Buy("PeanutButter"); //1.25 each, Buy 2 get 1 free
+            testReceipt.Buy("PeanutButter");
+            testReceipt.Buy("PeanutButter");
+
+            decimal expectedTotal = 2.50m;
+            int expectedItemCount = 3;
+
+            Assert.AreEqual(expectedTotal, testReceipt.Total());
+            Assert.AreEqual(expectedItemCount, testReceipt.ItemCount());
+
         }
     }
 }
