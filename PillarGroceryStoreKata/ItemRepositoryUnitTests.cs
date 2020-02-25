@@ -53,6 +53,34 @@ namespace PillarGroceryStoreKata
             Assert.AreEqual(expectedPrice, itemRepository.PriceCheck("Milk"));
         }
 
-        
+        [TestMethod]
+        public void CheckSaleInformationReturnsAnItemOBject()
+        {
+            var itemRepository = new ItemRepository();
+            itemRepository.Add("Milk", 2.49);
+
+            Assert.IsInstanceOfType(itemRepository.CheckSaleInfo("Milk"), typeof(Item));
+        }
+
+        [TestMethod]
+        public void BuyNumberGetNumberFreeLimitNumberSetsUpTheNeededNumbers()
+        {
+            var itemRepository = new ItemRepository();
+            itemRepository.Add("Milk", 2.49);
+            itemRepository.BuyNumberGetNumberFreeLimitNumber("Milk", 2, 1, 3);
+
+            int expectedLimit = 4;
+            int expectedRequiredToBuy = 2;
+            int expectedGainedFree = 1;
+
+            Item testItem = itemRepository.CheckSaleInfo("Milk");
+
+            Assert.AreEqual(expectedLimit, testItem.LimitNumber);
+            Assert.AreEqual(expectedRequiredToBuy, testItem.BOGOPurchasedNumber);
+            Assert.AreEqual(expectedGainedFree, testItem.BOGOFreeReceivedNumber);
+
+        }
+
+
     }
 }

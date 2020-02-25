@@ -8,6 +8,10 @@ namespace GroceryStoreReceiptLibrary
     {
         public string Name { get; set; }
         public decimal Price { get; set; }
+        public int LimitNumber { get; set; }
+        public int BOGOPurchasedNumber { get; set; }
+        public int BOGOFreeReceivedNumber { get; set; }
+
 
         public decimal PriceMarkDown { get; set; }
 

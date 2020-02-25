@@ -64,5 +64,10 @@ namespace GroceryStoreReceiptLibrary
         {
             throw new NotImplementedException();
         }
+
+        public Item CheckSaleInfo(string itemName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
