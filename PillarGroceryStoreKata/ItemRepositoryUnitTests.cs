@@ -76,9 +76,32 @@ namespace PillarGroceryStoreKata
 
             Item testItem = itemRepository.CheckSaleInfo("Milk");
 
-            Assert.AreEqual(expectedLimit, testItem.LimitNumber);
+            Assert.AreEqual(expectedLimit, testItem.BOGOLimit);
             Assert.AreEqual(expectedRequiredToBuy, testItem.BOGOPurchasedNumber);
             Assert.AreEqual(expectedGainedFree, testItem.BOGOFreeReceivedNumber);
+
+        }
+
+        [TestMethod]
+        public void BuyNumberGetNumberAtDiscountPercentLimitNumberSetsUpProperInformationInItem()
+        {
+            var itemRepository = new ItemRepository();
+            itemRepository.Add("Bread", 1.49);
+            itemRepository.BuyNumberGetNumberAtDiscountPercentLimitNumber("Bread", 4, 2, .50, 6);
+
+            int expectedRequiredToGetDiscount = 4;
+            int expectedToReceiveDiscount = 3;
+            decimal expectedDiscountPercentage = .50m;
+            int expectedDiscountLimit = 6;
+
+
+            Item testItem = itemRepository.CheckSaleInfo("Bread");
+
+            Assert.AreEqual(expectedRequiredToGetDiscount, testItem.RequiredToGetDiscount);
+            Assert.AreEqual(expectedToReceiveDiscount, testItem.ToReceiveDiscount);
+            Assert.AreEqual(expectedDiscountPercentage, testItem.DiscountPercentage);
+            Assert.AreEqual(expectedDiscountLimit, testItem.DiscountLimit);
+
 
         }
 

@@ -35,7 +35,6 @@ namespace GroceryStoreReceiptLibrary
                 throw new ItemNotFound();
             }
             
-            
             ItemsOnReceipt.Add(new Item(itemName, AdjustPriceForVariousSaleTypes(PriceList.CheckSaleInfo(itemName))));
         }
 
@@ -54,7 +53,7 @@ namespace GroceryStoreReceiptLibrary
 
         private decimal AdjustPriceForBOGOSale(Item itemToBeBought)
         {
-            if (ItemsOnReceipt.Where(x => x.Name == itemToBeBought.Name).Count() >= itemToBeBought.BOGOPurchasedNumber && ItemsOnReceipt.Where(x => x.Name == itemToBeBought.Name).Count() < itemToBeBought.LimitNumber)
+            if (ItemsOnReceipt.Where(x => x.Name == itemToBeBought.Name).Count() >= itemToBeBought.BOGOPurchasedNumber && ItemsOnReceipt.Where(x => x.Name == itemToBeBought.Name).Count() < itemToBeBought.BOGOLimit)
             {
                 return 0;
             }
@@ -88,9 +87,7 @@ namespace GroceryStoreReceiptLibrary
             ItemsOnReceipt.Remove(itemToBeRemoved);
 
         }
-
         
-
         public void Void(string itemName, int itemQuantity)
         {
             for(int i=0; i<itemQuantity; i++)

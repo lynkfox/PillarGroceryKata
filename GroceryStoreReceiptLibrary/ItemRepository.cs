@@ -42,9 +42,9 @@ namespace GroceryStoreReceiptLibrary
 
         public decimal PriceCheck(string itemName)
         {
-
             return Items.Where(x => x.Name == itemName).Select(x => x.Price-x.PriceMarkDown).FirstOrDefault();
         }
+
         public Item CheckSaleInfo(string itemName)
         {
             return Items.Where(x => x.Name == itemName).First();
@@ -62,11 +62,8 @@ namespace GroceryStoreReceiptLibrary
         {
             Items.Where(x => x.Name == itemName).First().BOGOFreeReceivedNumber = numberReceivedFree;
             Items.Where(x => x.Name == itemName).First().BOGOPurchasedNumber = numberNeedToBuy;
-            Items.Where(x => x.Name == itemName).First().LimitNumber = LimitOnDealTotalItems;
-
+            Items.Where(x => x.Name == itemName).First().BOGOLimit = LimitOnDealTotalItems;
         }
-
-        
 
         public void BuyNumberGetNumberAtDiscountPercentLimitNumber(string itemName, int numberNeedToBuy, int numberToReceiveDiscount, double discountInPercentage, int LimitOnDealTotalItems)
         {
