@@ -67,7 +67,10 @@ namespace GroceryStoreReceiptLibrary
 
         public void BuyNumberGetNumberAtDiscountPercentLimitNumber(string itemName, int numberNeedToBuy, int numberToReceiveDiscount, double discountInPercentage, int LimitOnDealTotalItems)
         {
-            throw new NotImplementedException();
+            Items.Where(x => x.Name == itemName).First().RequiredToGetDiscount = numberNeedToBuy;
+            Items.Where(x => x.Name == itemName).First().ToReceiveDiscount = numberToReceiveDiscount;
+            Items.Where(x => x.Name == itemName).First().DiscountPercentage = Convert.ToDecimal(discountInPercentage);
+            Items.Where(x => x.Name == itemName).First().DiscountLimit = LimitOnDealTotalItems;
         }
 
         public void BuyNumberGetDiscountPercentOnEqualOrLesser(string itemName, int numberNeedToBuy, double discountPercentageOnNextItem )

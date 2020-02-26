@@ -90,7 +90,7 @@ namespace PillarGroceryStoreKata
             itemRepository.BuyNumberGetNumberAtDiscountPercentLimitNumber("Bread", 4, 2, .50, 6);
 
             int expectedRequiredToGetDiscount = 4;
-            int expectedToReceiveDiscount = 3;
+            int expectedToReceiveDiscount = 2;
             decimal expectedDiscountPercentage = .50m;
             int expectedDiscountLimit = 6;
 

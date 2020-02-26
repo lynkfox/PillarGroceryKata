@@ -13,8 +13,10 @@ namespace PillarGroceryStoreKata
             testItemRepository.Add("Rotini", 5.49);
             testItemRepository.Add("TomatoSoup", .49);
             testItemRepository.Add("PeanutButter", 1.25);
+            testItemRepository.Add("Bread", 2.50);
 
             testItemRepository.BuyNumberGetNumberFreeLimitNumber("PeanutButter", 2, 1, 3);
+            testItemRepository.BuyNumberGetNumberAtDiscountPercentLimitNumber("Bread", 4, 2, .50, 12);
 
             return new Receipt(testItemRepository);
         }
@@ -225,6 +227,6 @@ namespace PillarGroceryStoreKata
             Assert.AreEqual(expectedItemCount, testReceipt.ItemCount());
         }
 
-        
+       
     }
 }
