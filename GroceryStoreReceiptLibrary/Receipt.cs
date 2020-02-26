@@ -44,6 +44,10 @@ namespace GroceryStoreReceiptLibrary
             {
                 return AdjustPriceForBOGOSale(itemToBeBought);
             }
+            else if (itemToBeBought.RequiredToGetDiscount != 0)
+            {
+                return AdjustPriceForBOGDiscountSale(itemToBeBought);
+            }
             else
             {
                 return itemToBeBought.Price;
@@ -58,6 +62,18 @@ namespace GroceryStoreReceiptLibrary
                 return 0;
             }
             else //if BOGO Items Have Not Yet Reached Required Purchase Amount
+            {
+                return itemToBeBought.Price;
+            }
+        }
+
+        private decimal AdjustPriceForBOGDiscountSale(Item itemToBeBought)
+        {
+            if (ItemsOnReceipt.Where(x => x.Name == itemToBeBought.Name).Count() >= itemToBeBought.RequiredToGetDiscount && ItemsOnReceipt.Where(x => x.Name == itemToBeBought.Name).Count() < itemToBeBought.DiscountLimit)
+            {
+                return itemToBeBought.Price*itemToBeBought.DiscountPercentage;
+            }
+            else //if BOGetDiscount Items Have Not Yet Reached Required Purchase Amount
             {
                 return itemToBeBought.Price;
             }
