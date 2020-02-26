@@ -69,9 +69,21 @@ namespace GroceryStoreReceiptLibrary
 
         private decimal AdjustPriceForBOGDiscountSale(Item itemToBeBought)
         {
-            if (ItemsOnReceipt.Where(x => x.Name == itemToBeBought.Name).Count() >= itemToBeBought.RequiredToGetDiscount && ItemsOnReceipt.Where(x => x.Name == itemToBeBought.Name).Count() < itemToBeBought.DiscountLimit)
+            int numberOfItemsAlreadyPurchased = ItemsOnReceipt.Where(x => x.Name == itemToBeBought.Name).Count();
+            int itemsThatNeedToBePurchasedBeforeNewSetToResetSale = itemToBeBought.RequiredToGetDiscount + itemToBeBought.ToReceiveDiscount;
+
+
+            if (numberOfItemsAlreadyPurchased >= itemToBeBought.RequiredToGetDiscount && numberOfItemsAlreadyPurchased < itemToBeBought.DiscountLimit)
             {
-                return itemToBeBought.Price*itemToBeBought.DiscountPercentage;
+                if(numberOfItemsAlreadyPurchased%itemToBeBought.RequiredToGetDiscount < itemToBeBought.ToReceiveDiscount)
+                {
+                    return itemToBeBought.Price * itemToBeBought.DiscountPercentage;
+                }
+                else
+                {
+                    return itemToBeBought.Price;
+                }
+                
             }
             else //if BOGetDiscount Items Have Not Yet Reached Required Purchase Amount
             {

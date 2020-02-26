@@ -18,7 +18,5 @@ namespace PillarGroceryStoreKata
             Assert.AreEqual(expectedName, testItem.Name);
             Assert.AreEqual(expectedPrice, testItem.Price);
         }
-
-
     }
 }
