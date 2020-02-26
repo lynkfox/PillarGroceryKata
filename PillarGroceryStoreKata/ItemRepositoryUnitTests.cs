@@ -102,7 +102,6 @@ namespace PillarGroceryStoreKata
             Assert.AreEqual(expectedDiscountPercentage, testItem.DiscountPercentage);
             Assert.AreEqual(expectedDiscountLimit, testItem.DiscountLimit);
 
-
         }
 
 

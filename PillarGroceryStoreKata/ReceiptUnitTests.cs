@@ -227,6 +227,18 @@ namespace PillarGroceryStoreKata
             Assert.AreEqual(expectedItemCount, testReceipt.ItemCount());
         }
 
-       
+        [TestMethod]
+        public void BuyItemsWithDiscountTypeSaleAddsProperCostToTotal()
+        {
+            var testReceipt = SetupReceipt();
+            testReceipt.Buy("Bread", 6); //4 at 2.50 Each, 2 at 50% (1.25)
+
+
+            decimal expectedTotal = 12.50m;
+            int expectedItemCount = 6;
+
+            Assert.AreEqual(expectedTotal, testReceipt.Total());
+            Assert.AreEqual(expectedItemCount, testReceipt.ItemCount());
+        }
     }
 }
