@@ -46,9 +46,11 @@ namespace GroceryStoreReceiptLibrary
             ItemsOnReceipt.Add(new Item(itemName, AdjustPriceForVariousSaleTypes(PriceList.CheckSaleInfo(itemName))));
         }
 
-        public void Buy(string name, int itemQuantity, double weight)
+        public void Buy(string itemName, int itemQuantity, double weight)
         {
-            throw new NotImplementedException();
+            decimal weightInDecimal = Convert.ToDecimal(weight);
+            decimal roundedMoneyPriceOfItem = Math.Round(AdjustPriceForBOGDiscountSale(PriceList.CheckSaleInfo(itemName)) * weightInDecimal,2, MidpointRounding.AwayFromZero);
+            ItemsOnReceipt.Add(new Item(itemName, roundedMoneyPriceOfItem));
         }
 
         public void Buy(string itemName, int itemQuantity)
