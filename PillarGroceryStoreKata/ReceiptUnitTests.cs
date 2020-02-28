@@ -323,13 +323,25 @@ namespace PillarGroceryStoreKata
        
 
         [TestMethod]
-        public void BuyGroupPriceItemsGetsDiscountedPriceAtGroupNumber()
+        public void BuyGroupPriceItemsGetsDiscountedWithDifferentAmountThanGroupNumber()
         {
             var testReceipt = SetupReceipt();
             testReceipt.Buy("OysterCrackers", 4);
 
             decimal expectedTotal = 6.68m;
             int expectedItemCount = 4;
+
+            Assert.AreEqual(expectedTotal, testReceipt.Total());
+            Assert.AreEqual(expectedItemCount, testReceipt.ItemCount());
+        }
+        [TestMethod]
+        public void BuyGroupPriceItemsGetsDiscountedPriceAtGroupNumber()
+        {
+            var testReceipt = SetupReceipt();
+            testReceipt.Buy("OysterCrackers", 3);
+
+            decimal expectedTotal = 5;
+            int expectedItemCount = 3;
 
             Assert.AreEqual(expectedTotal, testReceipt.Total());
             Assert.AreEqual(expectedItemCount, testReceipt.ItemCount());
