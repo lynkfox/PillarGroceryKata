@@ -22,6 +22,30 @@ namespace PillarGroceryStoreKata
             return new Receipt(testItemRepository);
         }
         [TestMethod]
+        public void BuyRoundsToNearest2DecimalPlacesUpfromPoint5()
+        {
+            var testItemRepository = new ItemRepository();
+            testItemRepository.Add("RoundUp", 2.495);
+            var testReceipt = new Receipt(testItemRepository);
+
+            decimal expectedRoundUp = 2.46m;
+
+            testReceipt.Buy("RoundUp");
+            Assert.AreEqual(expectedRoundUp, testReceipt.Total());
+        }
+        [TestMethod]
+        public void BuyRoundsToNearest2DecimalPlacesDownFromPoint4()
+        {
+            var testItemRepository = new ItemRepository();
+            testItemRepository.Add("RoundDown", 2.494);
+            var testReceipt = new Receipt(testItemRepository);
+
+            decimal expectedRoundDown = 2.44m;
+
+            testReceipt.Buy("RoundDown");
+            Assert.AreEqual(expectedRoundDown, testReceipt.Total());
+        }
+        [TestMethod]
         public void BuyIncreasesTheNumberOfItemsOnAReceipt()
         {
             var testReceipt = SetupReceipt();
