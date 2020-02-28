@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Collections;
 
 namespace GroceryStoreReceiptLibrary
 {
@@ -30,9 +31,13 @@ namespace GroceryStoreReceiptLibrary
 
         public Item LastItem()
         {
-            return ItemsOnReceipt.Last();
+            return ItemsOnReceipt.LastOrDefault();
         }
 
+        public IList AllItems()
+        {
+            return ItemsOnReceipt;
+        }
 
         //Add and Remove Items Methods
 
@@ -99,13 +104,8 @@ namespace GroceryStoreReceiptLibrary
             Void(ItemsOnReceipt.Last().Name);
         }
 
-        
 
-        
-
-
-        // Internal Price Adjustment Methods
-
+        //Sale calculation methods
         private decimal AdjustPriceForVariousSaleTypes(Item itemToBeBought)
         {
             if (itemToBeBought.RequiredToGetDiscount != 0)
@@ -129,7 +129,7 @@ namespace GroceryStoreReceiptLibrary
             decimal costOfAlreadyAddedToReceiptItems = ItemsOnReceipt.Where(x => x.Name == itemToBeBought.Name).Select(x => x.Price).Sum();
 
             //Check to see if when buying the final item in a group if the cost comes out to the advertised price.
-            if (numberOfItemsAlreadyPurchased+1 == itemToBeBought.GroupBuyingRequiredNumber && costOfAlreadyAddedToReceiptItems+itemToBeBought.ReducedGroupItemCost != itemToBeBought.GroupBuyGroupPrice)
+            if (numberOfItemsAlreadyPurchased + 1 == itemToBeBought.GroupBuyingRequiredNumber && costOfAlreadyAddedToReceiptItems + itemToBeBought.ReducedGroupItemCost != itemToBeBought.GroupBuyGroupPrice)
             {
                 return itemToBeBought.GroupBuyGroupPrice - costOfAlreadyAddedToReceiptItems;
             }
@@ -142,16 +142,16 @@ namespace GroceryStoreReceiptLibrary
             double numberOfItemsAlreadyPurchased = ItemsOnReceipt.Where(x => x.Name == itemToBeBought.Name).Count();
             int itemsThatNeedToBePurchasedBeforeNewSetToResetSale = itemToBeBought.RequiredToGetDiscount + itemToBeBought.ToReceiveDiscount;
 
-            if(itemToBeBought.PriceIsPerWeight)
+            if (itemToBeBought.PriceIsPerWeight)
             {
                 numberOfItemsAlreadyPurchased = ItemsOnReceipt.Where(x => x.Name == itemToBeBought.Name).Select(x => x.Weight).Sum();
             }
 
             if (numberOfItemsAlreadyPurchased >= itemToBeBought.RequiredToGetDiscount && numberOfItemsAlreadyPurchased < itemToBeBought.DiscountLimit)
             {
-                if(numberOfItemsAlreadyPurchased%itemToBeBought.RequiredToGetDiscount < itemToBeBought.ToReceiveDiscount)
+                if (numberOfItemsAlreadyPurchased % itemToBeBought.RequiredToGetDiscount < itemToBeBought.ToReceiveDiscount)
                 {
-                    return itemToBeBought.Price - (itemToBeBought.Price * itemToBeBought.DiscountPercentage) ;
+                    return itemToBeBought.Price - (itemToBeBought.Price * itemToBeBought.DiscountPercentage);
                 }
                 else
                 {
@@ -164,7 +164,7 @@ namespace GroceryStoreReceiptLibrary
             }
         }
 
-        
-       
+
+
     }
 }

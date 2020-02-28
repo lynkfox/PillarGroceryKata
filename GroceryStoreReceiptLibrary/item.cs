@@ -18,7 +18,6 @@ namespace GroceryStoreReceiptLibrary
         public int DiscountLimit { get; set; }
 
         public bool EqualOrLesserValueRequired { get; set; }
-
         public int GroupBuyingRequiredNumber { get; set; }
         public decimal GroupBuyGroupPrice { get; set; }
         public decimal ReducedGroupItemCost { get; set; }
