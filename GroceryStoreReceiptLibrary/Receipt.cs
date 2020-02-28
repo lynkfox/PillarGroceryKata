@@ -115,9 +115,20 @@ namespace GroceryStoreReceiptLibrary
 
         private decimal AdjustPriceForBOGOSale(Item itemToBeBought)
         {
-            if (ItemsOnReceipt.Where(x => x.Name == itemToBeBought.Name).Count() >= itemToBeBought.BOGOPurchasedNumber && ItemsOnReceipt.Where(x => x.Name == itemToBeBought.Name).Count() < itemToBeBought.BOGOLimit)
+            int numberOfItemsAlreadyPurchased = ItemsOnReceipt.Where(x => x.Name == itemToBeBought.Name).Count();
+            int itemsThatNeedToBePurchasedBeforeNewSetToResetSale = itemToBeBought.BOGOPurchasedNumber + itemToBeBought.BOGOLimit;
+
+            if (numberOfItemsAlreadyPurchased >= itemToBeBought.BOGOPurchasedNumber && numberOfItemsAlreadyPurchased < itemToBeBought.BOGOLimit)
             {
-                return 0;
+                //if limit is greater than one set of Items Needed+Free Items, calculate where purchase is in further sets.
+                if (numberOfItemsAlreadyPurchased % itemToBeBought.BOGOPurchasedNumber < itemToBeBought.BOGOFreeReceivedNumber)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return itemToBeBought.Price;
+                }
             }
             else //if BOGO Items Have Not Yet Reached Required Purchase Amount
             {
