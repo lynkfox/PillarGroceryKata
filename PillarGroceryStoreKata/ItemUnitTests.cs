@@ -18,5 +18,21 @@ namespace PillarGroceryStoreKata
             Assert.AreEqual(expectedName, testItem.Name);
             Assert.AreEqual(expectedPrice, testItem.Price);
         }
+        [TestMethod]
+        public void ItemCanHaveAPerUnitDesignationOfPricePerUnit()
+        {
+            decimal price = 1.99m;
+            int unit = 1;
+            var testItem = new Item("GroundBeef", price, unit);
+
+            string expectedName = "GroundBeef";
+            decimal expectedPrice = 1.99m;
+            bool expectedPerUnit = true;
+
+            Assert.AreEqual(expectedName, testItem.Name);
+            Assert.AreEqual(expectedPrice, testItem.Price);
+            Assert.AreEqual(expectedPerUnit, testItem.PriceIsPerWeight);
+
+        }
     }
 }

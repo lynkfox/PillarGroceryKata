@@ -40,6 +40,16 @@ namespace PillarGroceryStoreKata
             Assert.AreEqual(expectedPrice, itemRepository.PriceCheck("TomatoSoup"));
             Assert.AreEqual(expectedItemCount, itemRepository.Count);
         }
+        [TestMethod]
+        public void ItemAddedWithPricePerUnitQualificationProperlyAddsItem()
+        {
+            var itemRepository = new ItemRepository();
+            decimal expectedPrice = 1.99m;
+
+            itemRepository.Add("GroundBeef", 1.99, 1);
+
+            Assert.AreEqual(expectedPrice, itemRepository.PriceCheck("TomatoSoup"));
+        }
 
         [TestMethod]
         public void MarkdownCausesPriceCheckToReturnPriceAsChangedByMarkdownAmount()

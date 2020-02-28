@@ -31,7 +31,7 @@ namespace PillarGroceryStoreKata
             receiptBeingTested.Buy("TomatoSoup"); //+.49
             receiptBeingTested.Buy("TomatoSoup"); //+0
             receiptBeingTested.Buy("TomatoSoup", 4); // +.49+.49+.0+.49 (1.47)
-            receiptBeingTested.Buy("GroundBeef", 3); //+5.97
+            receiptBeingTested.Buy("GroundBeef", 1, 3.5); //+6.97
             receiptBeingTested.Buy("Salmon", 3); //+29.97
             receiptBeingTested.Buy("Milk", 3); //+8.72
             receiptBeingTested.Void("RotiniPasta"); //-5.95
