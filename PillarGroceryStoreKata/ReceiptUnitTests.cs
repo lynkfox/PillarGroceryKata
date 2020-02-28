@@ -328,7 +328,7 @@ namespace PillarGroceryStoreKata
             var testReceipt = SetupReceipt();
             testReceipt.Buy("OysterCrackers", 4);
 
-            decimal expectedTotal = 6.68m;
+            decimal expectedTotal = 6.67m;
             int expectedItemCount = 4;
 
             Assert.AreEqual(expectedTotal, testReceipt.Total());

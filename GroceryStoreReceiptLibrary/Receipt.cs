@@ -116,6 +116,14 @@ namespace GroceryStoreReceiptLibrary
 
         private decimal AdjustPriceForGroupBuying(Item itemToBeBought)
         {
+            int numberOfItemsAlreadyPurchased = ItemsOnReceipt.Where(x => x.Name == itemToBeBought.Name).Count();
+            decimal costOfAlreadyAddedToReceiptItems = ItemsOnReceipt.Where(x => x.Name == itemToBeBought.Name).Select(x => x.Price).Sum();
+
+            //Check to see if when buying the final item in a group if the cost comes out to the advertised price.
+            if (numberOfItemsAlreadyPurchased+1 == itemToBeBought.GroupBuyingRequiredNumber && costOfAlreadyAddedToReceiptItems+itemToBeBought.ReducedGroupItemCost != itemToBeBought.GroupBuyGroupPrice)
+            {
+                return itemToBeBought.GroupBuyGroupPrice - costOfAlreadyAddedToReceiptItems;
+            }
             return itemToBeBought.ReducedGroupItemCost;
         }
 
