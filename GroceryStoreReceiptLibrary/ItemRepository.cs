@@ -75,7 +75,7 @@ namespace GroceryStoreReceiptLibrary
             Items.Where(x => x.Name == itemName).First().DiscountLimit = LimitOnDealTotalItems;
         }
 
-        public void BuyNumberGetDiscountPercentOnEqualOrLesser(string itemName, int numberNeedToBuy, double discountPercentageOnNextItem )
+        public void BuyNumberGetDiscountPercentOnEqualOrLesser(string itemName, double numberNeedToBuy, double numberToGetDiscount, double discountPercentageOnNextItem )
         {
             throw new NotImplementedException();
         }
