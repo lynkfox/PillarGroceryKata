@@ -42,6 +42,10 @@ namespace GroceryStoreReceiptLibrary
             Buy(itemName, 1);
             
         }
+        public void Buy(string itemName, int itemQuantity)
+        {
+            Buy(itemName, itemQuantity, 1);
+        }
 
         public void Buy(string itemName, int itemQuantity, double weight)
         {
@@ -61,16 +65,14 @@ namespace GroceryStoreReceiptLibrary
             
         }
 
-        public void Buy(string itemName, int itemQuantity)
-        {
-            Buy(itemName, itemQuantity, 1);
-        }
 
-        public void Void()
+        public void Void(string itemName, int itemQuantity)
         {
-            Void(ItemsOnReceipt.Last().Name);
+            for (int i = 0; i < itemQuantity; i++)
+            {
+                Void(itemName);
+            }
         }
-
         public void Void(string itemName)
         {
             var itemToBeRemoved = ItemsOnReceipt.Where(x => x.Name == itemName).LastOrDefault();
@@ -83,13 +85,14 @@ namespace GroceryStoreReceiptLibrary
 
         }
 
-        public void Void(string itemName, int itemQuantity)
+        public void Void()
         {
-            for (int i = 0; i < itemQuantity; i++)
-            {
-                Void(itemName);
-            }
+            Void(ItemsOnReceipt.Last().Name);
         }
+
+        
+
+        
 
 
         // Internal Price Adjustment Methods
@@ -107,8 +110,6 @@ namespace GroceryStoreReceiptLibrary
 
         }
 
-        
-
         private decimal AdjustPriceForBuySomeGetDiscountSale(Item itemToBeBought)
         {
             int numberOfItemsAlreadyPurchased = ItemsOnReceipt.Where(x => x.Name == itemToBeBought.Name).Count();
@@ -125,7 +126,7 @@ namespace GroceryStoreReceiptLibrary
                     return itemToBeBought.Price;
                 }
             }
-            else //if BOGetDiscount Items Have Not Yet Reached Required Purchase Amount
+            else //if BuySomeGetDiscount Items Have Not Yet Reached Required Purchase Amount
             {
                 return itemToBeBought.Price;
             }
