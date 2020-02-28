@@ -25,7 +25,7 @@ namespace PillarGroceryStoreKata
         public void BuyRoundsToNearest2DecimalPlacesUpfromPoint5()
         {
             var testItemRepository = new ItemRepository();
-            testItemRepository.Add("RoundUp", 2.495);
+            testItemRepository.Add("RoundUp", 2.455);
             var testReceipt = new Receipt(testItemRepository);
 
             decimal expectedRoundUp = 2.46m;
@@ -34,13 +34,13 @@ namespace PillarGroceryStoreKata
             Assert.AreEqual(expectedRoundUp, testReceipt.Total());
         }
         [TestMethod]
-        public void BuyRoundsToNearest2DecimalPlacesUpFromUnderPoint5()
+        public void BuyRoundsToNearest2DecimalPlacesDownFromPoint4Below()
         {
             var testItemRepository = new ItemRepository();
-            testItemRepository.Add("RoundDown", 2.494);
+            testItemRepository.Add("RoundDown", 2.454);
             var testReceipt = new Receipt(testItemRepository);
 
-            decimal expectedRoundDown = 2.46m;
+            decimal expectedRoundDown = 2.45m;
 
             testReceipt.Buy("RoundDown");
             Assert.AreEqual(expectedRoundDown, testReceipt.Total());
@@ -103,7 +103,7 @@ namespace PillarGroceryStoreKata
         public void BuyAnItemThatIsSoldByWeightProperlyAddsToReceiptAndTotal()
         {
             var testReceipt = SetupReceipt();
-            decimal expectedTotal = 6.97m;
+            decimal expectedTotal = 6.96m;
             int expectedItemCount = 1;
 
             testReceipt.Buy("GroundBeef", 1, 3.5);

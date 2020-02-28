@@ -42,14 +42,15 @@ namespace GroceryStoreReceiptLibrary
             {
                 throw new ItemNotFound();
             }
-            
-            ItemsOnReceipt.Add(new Item(itemName, AdjustPriceForVariousSaleTypes(PriceList.CheckSaleInfo(itemName))));
+            decimal roundedMoneyPriceOfItem = Decimal.Round(AdjustPriceForVariousSaleTypes(PriceList.CheckSaleInfo(itemName)), 2, MidpointRounding.ToEven);
+            ItemsOnReceipt.Add(new Item(itemName, roundedMoneyPriceOfItem));
         }
 
         public void Buy(string itemName, int itemQuantity, double weight)
         {
             decimal weightInDecimal = Convert.ToDecimal(weight);
-            decimal roundedMoneyPriceOfItem = Math.Round(AdjustPriceForBOGDiscountSale(PriceList.CheckSaleInfo(itemName)) * weightInDecimal,2, MidpointRounding.AwayFromZero);
+            decimal costOfItemPerWeight = AdjustPriceForBOGDiscountSale(PriceList.CheckSaleInfo(itemName)) * weightInDecimal;
+            decimal roundedMoneyPriceOfItem = Decimal.Round(costOfItemPerWeight,2, MidpointRounding.ToEven);
             ItemsOnReceipt.Add(new Item(itemName, roundedMoneyPriceOfItem));
         }
 
