@@ -18,11 +18,13 @@ namespace PillarGroceryStoreKata
             testItemRepository.Add("RotiniPasta", 5.95);
             testItemRepository.Add("Onions", 1.39);
             testItemRepository.Add("Salmon", 9.99, 1);
+            testItemRepository.Add("PeanutButter", 2);
 
             testItemRepository.Markdown("Milk", .49);
             testItemRepository.BuyNumberGetNumberAtDiscountPercentLimitNumber("TomatoSoup", 2, 1, 1,6);
             testItemRepository.BuyNumberGetNumberAtDiscountPercentLimitNumber("Milk", 1, 1, .25, 2);
             testItemRepository.BuyNumberGetDiscountPercentOnEqualOrLesser("GroundBeef", 2, .5);
+            testItemRepository.BuyGroupAtReducedPrice("PeanutButter", 3, 5m);
 
 
             var receiptBeingTested = new Receipt(testItemRepository);

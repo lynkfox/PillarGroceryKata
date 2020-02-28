@@ -17,11 +17,13 @@ namespace PillarGroceryStoreKata
             testItemRepository.Add("GroundBeef", 1.99, 1);
             testItemRepository.Add("Salmon", 9.99, 1);
             testItemRepository.Add("Soda", 5.69);
+            testItemRepository.Add("OysterCrackers", 2.09);
 
             testItemRepository.Markdown("Salmon", 1.99);
             testItemRepository.BuyNumberGetNumberAtDiscountPercentLimitNumber("PeanutButter", 2, 1, 1, 3);
             testItemRepository.BuyNumberGetNumberAtDiscountPercentLimitNumber("Soda", 2, 1, 1, 6);
             testItemRepository.BuyNumberGetNumberAtDiscountPercentLimitNumber("Bread", 4, 2, .50, 12);
+            testItemRepository.BuyGroupAtReducedPrice("OysterCrackers", 3, 5);
 
             return new Receipt(testItemRepository);
         }
@@ -314,6 +316,31 @@ namespace PillarGroceryStoreKata
 
             decimal expectedTotal = 25.6m;
             int expectedItemCount = 1;
+
+            Assert.AreEqual(expectedTotal, testReceipt.Total());
+            Assert.AreEqual(expectedItemCount, testReceipt.ItemCount());
+        }
+        [TestMethod]
+        public void BuyGroupPriceItemsGetsFullPriceIfLessThanGroup()
+        {
+            var testReceipt = SetupReceipt();
+            testReceipt.Buy("OysterCrackers",2);
+
+            decimal expectedTotal = 4.18m;
+            int expectedItemCount = 2;
+
+            Assert.AreEqual(expectedTotal, testReceipt.Total());
+            Assert.AreEqual(expectedItemCount, testReceipt.ItemCount());
+        }
+
+        [TestMethod]
+        public void BuyGroupPriceItemsGetsDiscountedPriceAtGroupNumber()
+        {
+            var testReceipt = SetupReceipt();
+            testReceipt.Buy("OysterCrackers", 4);
+
+            decimal expectedTotal = 5m;
+            int expectedItemCount = 4;
 
             Assert.AreEqual(expectedTotal, testReceipt.Total());
             Assert.AreEqual(expectedItemCount, testReceipt.ItemCount());

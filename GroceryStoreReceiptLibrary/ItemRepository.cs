@@ -80,6 +80,10 @@ namespace GroceryStoreReceiptLibrary
             throw new NotImplementedException();
         }
 
-        
+        public void BuyGroupAtReducedPrice(string itemName, int groupAmount, decimal costForEntireGroup)
+        {
+            Items.Where(x => x.Name == itemName).First().GroupBuyingRequiredNumber = groupAmount;
+            Items.Where(x => x.Name == itemName).First().GroupBuyGroupPrice = costForEntireGroup;
+        }
     }
 }

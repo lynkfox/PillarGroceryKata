@@ -16,6 +16,9 @@ namespace GroceryStoreReceiptLibrary
         public decimal DiscountPercentage { get; set; }
         public int DiscountLimit { get; set; }
 
+        public int GroupBuyingRequiredNumber { get; set; }
+        public decimal GroupBuyGroupPrice { get; set; }
+
 
         public decimal PriceMarkDown { get; set; }
 
