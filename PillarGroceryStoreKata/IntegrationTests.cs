@@ -30,19 +30,17 @@ namespace PillarGroceryStoreKata
 
 
             var receiptBeingTested = new Receipt(testItemRepository);
-            receiptBeingTested.Buy("Onions"); //+1.39 -- Use Case 1
-            receiptBeingTested.Buy("GroundBeef", 1, 3.5); //+6.96  -- Use Case 2 
-            receiptBeingTested.Buy("Milk"); // +1.49 -- Use Case 3a
-            receiptBeingTested.Buy("Salmon", 1, 4); //+37.6 -- Use Case 3b
-            receiptBeingTested.Buy("TomatoSoup", 3); //+.98 -- Use Case 4a
-            receiptBeingTested.Buy("RotiniPasta", 2); //+10.41 -- Use Case 4b
-            receiptBeingTested.Buy("PeanutButter", 3); //+5 -- Use Case 5
-            receiptBeingTested.Buy("RotiniPasta"); //+5.95 -- Already Hit Limit, Use Case 6
-            receiptBeingTested.Void("Onions"); // -1.39 -- Use Case 7a
-            receiptBeingTested.Void("RotiniPasta", 2);  //-5.95 - 4.46 -- Use Case 7b 
-            receiptBeingTested.Buy("Salmon", 1, 1); //+4.75 -- Use Case 8
-
-
+            receiptBeingTested.Buy("Onions"); //Use Case 1
+            receiptBeingTested.Buy("GroundBeef", 1, 3.5); // Use Case 2 
+            receiptBeingTested.Buy("Milk"); //Use Case 3a
+            receiptBeingTested.Buy("Salmon", 1, 4); //Use Case 3b
+            receiptBeingTested.Buy("TomatoSoup", 3); //Use Case 4a
+            receiptBeingTested.Buy("RotiniPasta", 2); //Use Case 4b
+            receiptBeingTested.Buy("PeanutButter", 3); //Use Case 5
+            receiptBeingTested.Buy("RotiniPasta"); //Already Hit Limit, Use Case 6
+            receiptBeingTested.Void("Onions"); //Use Case 7a
+            receiptBeingTested.Void("RotiniPasta", 2);  //Use Case 7b 
+            receiptBeingTested.Buy("Salmon", 1, 1); //Use Case 8
 
             return receiptBeingTested;
             
@@ -52,7 +50,7 @@ namespace PillarGroceryStoreKata
         {
             var receipt = Setup();
 
-            decimal expectedTotal = 62.73m;
+            decimal expectedTotal = 65.34m;
             int expectedNumberOfItems = 11; //Ground Beef and Salmon only count as 1 each
             string expectedLastItem = "Salmon";
             
