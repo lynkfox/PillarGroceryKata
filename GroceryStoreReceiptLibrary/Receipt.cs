@@ -38,28 +38,32 @@ namespace GroceryStoreReceiptLibrary
 
         public void Buy(string itemName)
         {
-            if(!PriceList.DoesItemExist(itemName))
-            {
-                throw new ItemNotFound();
-            }
-            decimal roundedMoneyPriceOfItem = Decimal.Round(AdjustPriceForVariousSaleTypes(PriceList.CheckSaleInfo(itemName)), 2, MidpointRounding.ToEven);
-            ItemsOnReceipt.Add(new Item(itemName, roundedMoneyPriceOfItem));
+
+            Buy(itemName, 1);
+            
         }
 
         public void Buy(string itemName, int itemQuantity, double weight)
         {
+            if (!PriceList.DoesItemExist(itemName))
+            {
+                throw new ItemNotFound();
+            }
+            
             decimal weightInDecimal = Convert.ToDecimal(weight);
-            decimal costOfItemPerWeight = AdjustPriceForBOGDiscountSale(PriceList.CheckSaleInfo(itemName)) * weightInDecimal;
-            decimal roundedMoneyPriceOfItem = Decimal.Round(costOfItemPerWeight,2, MidpointRounding.ToEven);
-            ItemsOnReceipt.Add(new Item(itemName, roundedMoneyPriceOfItem));
+
+            for(int i = 0; i < itemQuantity; i++)
+            {
+                decimal costOfItemPerWeight = AdjustPriceForVariousSaleTypes(PriceList.CheckSaleInfo(itemName)) * weightInDecimal;
+                decimal roundedMoneyPriceOfItem = Decimal.Round(costOfItemPerWeight, 2, MidpointRounding.ToEven);
+                ItemsOnReceipt.Add(new Item(itemName, roundedMoneyPriceOfItem));
+            }
+            
         }
 
         public void Buy(string itemName, int itemQuantity)
         {
-            for (int i = 0; i < itemQuantity; i++)
-            {
-                Buy(itemName);
-            }
+            Buy(itemName, itemQuantity, 1);
         }
 
         public void Void()
