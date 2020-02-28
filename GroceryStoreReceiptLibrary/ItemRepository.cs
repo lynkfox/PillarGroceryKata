@@ -42,6 +42,8 @@ namespace GroceryStoreReceiptLibrary
             
         }
 
+        
+
         //Item Information Gathering Methods
 
         internal bool DoesItemExist(string itemName)
@@ -75,9 +77,9 @@ namespace GroceryStoreReceiptLibrary
             Items.Where(x => x.Name == itemName).First().DiscountLimit = LimitOnDealTotalItems;
         }
 
-        public void BuyNumberGetDiscountPercentOnEqualOrLesser(string itemName, double numberNeedToBuy, double numberToGetDiscount, double discountPercentageOnNextItem )
+        public void SetEqualOrLesserAmount(string itemName)
         {
-            throw new NotImplementedException();
+            Items.Where(x => x.Name == itemName).First().EqualOrLesserValueRequired = true;
         }
 
         public void BuyGroupAtReducedPrice(string itemName, int groupAmount, decimal costForEntireGroup)

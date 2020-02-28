@@ -30,6 +30,7 @@ namespace GroceryStoreReceiptLibrary
             Name = itemName;
             Price = itemPrice;
             PriceIsPerWeight = true;
+            EqualOrLesserValueRequired = false;
             PricePerUnit = unit;
         }
         public Item(string itemName, decimal itemPrice)
@@ -38,6 +39,7 @@ namespace GroceryStoreReceiptLibrary
             Price = itemPrice;
             PricePerUnit = 1;
             PriceIsPerWeight = false;
+            EqualOrLesserValueRequired = false;
         }
 
     }
