@@ -56,7 +56,9 @@ namespace GroceryStoreReceiptLibrary
 
         public Item CheckSaleInfo(string itemName)
         {
-            return Items.Where(x => x.Name == itemName).First();
+            var itemWithSaleInfo = Items.Where(x => x.Name == itemName).First();
+            itemWithSaleInfo.Price -= itemWithSaleInfo.PriceMarkDown;
+            return itemWithSaleInfo;
         }
 
 

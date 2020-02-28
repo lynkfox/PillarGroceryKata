@@ -15,8 +15,10 @@ namespace PillarGroceryStoreKata
             testItemRepository.Add("PeanutButter", 1.25);
             testItemRepository.Add("Bread", 2.50);
             testItemRepository.Add("GroundBeef", 1.99, 1);
+            testItemRepository.Add("Salmon", 9.99, 1);
             testItemRepository.Add("Soda", 5.69);
 
+            testItemRepository.Markdown("Salmon", 1.99);
             testItemRepository.BuyNumberGetNumberFreeLimitNumber("PeanutButter", 2, 1, 3);
             testItemRepository.BuyNumberGetNumberFreeLimitNumber("Soda", 2, 1, 6);
             testItemRepository.BuyNumberGetNumberAtDiscountPercentLimitNumber("Bread", 4, 2, .50, 12);
@@ -299,6 +301,19 @@ namespace PillarGroceryStoreKata
 
             decimal expectedTotal = 27.50m;
             int expectedItemCount = 13;
+
+            Assert.AreEqual(expectedTotal, testReceipt.Total());
+            Assert.AreEqual(expectedItemCount, testReceipt.ItemCount());
+        }
+
+        [TestMethod]
+        public void BuyItemsPerWeightWithAMarkDownProperlyMarksDownEachPound()
+        {
+            var testReceipt = SetupReceipt();
+            testReceipt.Buy("Salmon", 1, 3.2);
+
+            decimal expectedTotal = 25.6m;
+            int expectedItemCount = 1;
 
             Assert.AreEqual(expectedTotal, testReceipt.Total());
             Assert.AreEqual(expectedItemCount, testReceipt.ItemCount());
