@@ -96,47 +96,20 @@ namespace GroceryStoreReceiptLibrary
 
         private decimal AdjustPriceForVariousSaleTypes(Item itemToBeBought)
         {
-            if (itemToBeBought.BOGOPurchasedNumber != 0)
+            if (itemToBeBought.RequiredToGetDiscount != 0)
             {
-                return AdjustPriceForBOGOSale(itemToBeBought);
-            }
-            else if (itemToBeBought.RequiredToGetDiscount != 0)
-            {
-                return AdjustPriceForBOGDiscountSale(itemToBeBought);
+                return AdjustPriceForBuySomeGetDiscountSale(itemToBeBought);
             }
             else
             {
-                return itemToBeBought.Price;
+                return itemToBeBought.Price-itemToBeBought.PriceMarkDown;
             }
 
         }
 
         
 
-        private decimal AdjustPriceForBOGOSale(Item itemToBeBought)
-        {
-            int numberOfItemsAlreadyPurchased = ItemsOnReceipt.Where(x => x.Name == itemToBeBought.Name).Count();
-            int itemsThatNeedToBePurchasedBeforeNewSetToResetSale = itemToBeBought.BOGOPurchasedNumber + itemToBeBought.BOGOLimit;
-
-            if (numberOfItemsAlreadyPurchased >= itemToBeBought.BOGOPurchasedNumber && numberOfItemsAlreadyPurchased < itemToBeBought.BOGOLimit)
-            {
-                //if limit is greater than one set of Items Needed+Free Items, calculate where purchase is in further sets.
-                if (numberOfItemsAlreadyPurchased % itemToBeBought.BOGOPurchasedNumber < itemToBeBought.BOGOFreeReceivedNumber)
-                {
-                    return 0;
-                }
-                else
-                {
-                    return itemToBeBought.Price;
-                }
-            }
-            else //if BOGO Items Have Not Yet Reached Required Purchase Amount
-            {
-                return itemToBeBought.Price;
-            }
-        }
-
-        private decimal AdjustPriceForBOGDiscountSale(Item itemToBeBought)
+        private decimal AdjustPriceForBuySomeGetDiscountSale(Item itemToBeBought)
         {
             int numberOfItemsAlreadyPurchased = ItemsOnReceipt.Where(x => x.Name == itemToBeBought.Name).Count();
             int itemsThatNeedToBePurchasedBeforeNewSetToResetSale = itemToBeBought.RequiredToGetDiscount + itemToBeBought.ToReceiveDiscount;
@@ -145,7 +118,7 @@ namespace GroceryStoreReceiptLibrary
             {
                 if(numberOfItemsAlreadyPurchased%itemToBeBought.RequiredToGetDiscount < itemToBeBought.ToReceiveDiscount)
                 {
-                    return itemToBeBought.Price * itemToBeBought.DiscountPercentage;
+                    return itemToBeBought.Price - (itemToBeBought.Price * itemToBeBought.DiscountPercentage) ;
                 }
                 else
                 {

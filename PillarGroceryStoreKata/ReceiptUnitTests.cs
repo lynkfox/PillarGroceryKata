@@ -19,8 +19,8 @@ namespace PillarGroceryStoreKata
             testItemRepository.Add("Soda", 5.69);
 
             testItemRepository.Markdown("Salmon", 1.99);
-            testItemRepository.BuyNumberGetNumberFreeLimitNumber("PeanutButter", 2, 1, 3);
-            testItemRepository.BuyNumberGetNumberFreeLimitNumber("Soda", 2, 1, 6);
+            testItemRepository.BuyNumberGetNumberAtDiscountPercentLimitNumber("PeanutButter", 2, 1, 1, 3);
+            testItemRepository.BuyNumberGetNumberAtDiscountPercentLimitNumber("Soda", 2, 1, 1, 6);
             testItemRepository.BuyNumberGetNumberAtDiscountPercentLimitNumber("Bread", 4, 2, .50, 12);
 
             return new Receipt(testItemRepository);

@@ -10,9 +10,6 @@ namespace GroceryStoreReceiptLibrary
         public decimal Price { get; set; }
         public bool PriceIsPerWeight { get; set; }
         public int PricePerUnit { get; set; }
-        public int BOGOLimit { get; set; }
-        public int BOGOPurchasedNumber { get; set; }
-        public int BOGOFreeReceivedNumber { get; set; }
 
         public int RequiredToGetDiscount { get; set; }
         public int ToReceiveDiscount { get; set; }
