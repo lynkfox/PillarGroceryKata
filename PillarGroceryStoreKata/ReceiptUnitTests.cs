@@ -15,8 +15,10 @@ namespace PillarGroceryStoreKata
             testItemRepository.Add("PeanutButter", 1.25);
             testItemRepository.Add("Bread", 2.50);
             testItemRepository.Add("GroundBeef", 1.99, 1);
+            testItemRepository.Add("Soda", 5.69);
 
             testItemRepository.BuyNumberGetNumberFreeLimitNumber("PeanutButter", 2, 1, 3);
+            testItemRepository.BuyNumberGetNumberFreeLimitNumber("Soda", 2, 1, 6);
             testItemRepository.BuyNumberGetNumberAtDiscountPercentLimitNumber("Bread", 4, 2, .50, 12);
 
             return new Receipt(testItemRepository);
@@ -259,6 +261,18 @@ namespace PillarGroceryStoreKata
 
             decimal expectedTotal = 3.75m;
             int expectedItemCount = 4;
+
+            Assert.AreEqual(expectedTotal, testReceipt.Total());
+            Assert.AreEqual(expectedItemCount, testReceipt.ItemCount());
+        }
+        [TestMethod]
+        public void BuyItemsWithABOGOTypeSaleWithALimitOfMoreThanJustOneSetOfBOGOWillProduceProperAmountOfFreeItems()
+        {
+            var testReceipt = SetupReceipt();
+            testReceipt.Buy("Soda", 7); //5.69 each, buy 2 get 1 free, limit 6. 5@5.69+2Free
+
+            decimal expectedTotal = 28.45m;
+            int expectedItemCount = 7;
 
             Assert.AreEqual(expectedTotal, testReceipt.Total());
             Assert.AreEqual(expectedItemCount, testReceipt.ItemCount());
