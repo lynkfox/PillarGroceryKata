@@ -34,13 +34,13 @@ namespace PillarGroceryStoreKata
             Assert.AreEqual(expectedRoundUp, testReceipt.Total());
         }
         [TestMethod]
-        public void BuyRoundsToNearest2DecimalPlacesDownFromPoint4()
+        public void BuyRoundsToNearest2DecimalPlacesUpFromUnderPoint5()
         {
             var testItemRepository = new ItemRepository();
             testItemRepository.Add("RoundDown", 2.494);
             var testReceipt = new Receipt(testItemRepository);
 
-            decimal expectedRoundDown = 2.44m;
+            decimal expectedRoundDown = 2.46m;
 
             testReceipt.Buy("RoundDown");
             Assert.AreEqual(expectedRoundDown, testReceipt.Total());
