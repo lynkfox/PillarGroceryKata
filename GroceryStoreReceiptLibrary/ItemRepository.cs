@@ -59,6 +59,7 @@ namespace GroceryStoreReceiptLibrary
         public Item CheckSaleInfo(string itemName)
         {
             return Items.Where(x => x.Name == itemName).First();
+            //Got to watch this. .First() returns REFERENCE not INSTANCE
         }
 
 

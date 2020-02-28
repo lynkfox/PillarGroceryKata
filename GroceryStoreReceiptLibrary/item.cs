@@ -9,6 +9,7 @@ namespace GroceryStoreReceiptLibrary
         public string Name { get; set; }
         public decimal Price { get; set; }
         public bool PriceIsPerWeight { get; set; }
+        public double Weight { get; set; }
         public int PricePerUnit { get; set; }
 
         public int RequiredToGetDiscount { get; set; }

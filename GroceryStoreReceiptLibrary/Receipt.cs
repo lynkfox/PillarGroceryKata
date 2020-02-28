@@ -56,11 +56,20 @@ namespace GroceryStoreReceiptLibrary
             
             decimal weightInDecimal = Convert.ToDecimal(weight);
 
-            for(int i = 0; i < itemQuantity; i++)
+            var defaultItemInformationFromRepository = PriceList.CheckSaleInfo(itemName);
+            for (int i = 0; i < itemQuantity; i++)
             {
-                decimal costOfItemPerWeight = AdjustPriceForVariousSaleTypes(PriceList.CheckSaleInfo(itemName)) * weightInDecimal;
+                decimal costOfItemPerWeight = AdjustPriceForVariousSaleTypes(defaultItemInformationFromRepository) * weightInDecimal;
                 decimal roundedMoneyPriceOfItem = Decimal.Round(costOfItemPerWeight, 2, MidpointRounding.ToEven);
-                ItemsOnReceipt.Add(new Item(itemName, roundedMoneyPriceOfItem));
+
+                var itemToAddToReceipt = new Item(itemName, roundedMoneyPriceOfItem);
+
+                if (defaultItemInformationFromRepository.PriceIsPerWeight)
+                {
+                    itemToAddToReceipt.PriceIsPerWeight = true;
+                    itemToAddToReceipt.Weight = weight;
+                }
+                ItemsOnReceipt.Add(itemToAddToReceipt);
             }
             
         }
@@ -130,8 +139,13 @@ namespace GroceryStoreReceiptLibrary
 
         private decimal AdjustPriceForBuySomeGetDiscountSale(Item itemToBeBought)
         {
-            int numberOfItemsAlreadyPurchased = ItemsOnReceipt.Where(x => x.Name == itemToBeBought.Name).Count();
+            double numberOfItemsAlreadyPurchased = ItemsOnReceipt.Where(x => x.Name == itemToBeBought.Name).Count();
             int itemsThatNeedToBePurchasedBeforeNewSetToResetSale = itemToBeBought.RequiredToGetDiscount + itemToBeBought.ToReceiveDiscount;
+
+            if(itemToBeBought.PriceIsPerWeight)
+            {
+                numberOfItemsAlreadyPurchased = ItemsOnReceipt.Where(x => x.Name == itemToBeBought.Name).Select(x => x.Weight).Sum();
+            }
 
             if (numberOfItemsAlreadyPurchased >= itemToBeBought.RequiredToGetDiscount && numberOfItemsAlreadyPurchased < itemToBeBought.DiscountLimit)
             {
