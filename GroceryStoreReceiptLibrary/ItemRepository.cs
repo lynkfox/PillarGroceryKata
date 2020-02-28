@@ -16,7 +16,16 @@ namespace GroceryStoreReceiptLibrary
 
         public void Add(string itemName, double price, int perUnit)
         {
-            throw new NotImplementedException();
+            decimal precisePrice = Convert.ToDecimal(price);
+            if (!Items.Any(x => x.Name == itemName))
+            {
+                Items.Add(new Item(itemName, precisePrice, perUnit));
+                Count = Items.Count;
+            }
+            else
+            {
+                Items.Where(x => x.Name == itemName).FirstOrDefault().Price = precisePrice;
+            }
         }
 
         public void Add(string itemName, double price)
