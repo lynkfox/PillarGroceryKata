@@ -320,18 +320,7 @@ namespace PillarGroceryStoreKata
             Assert.AreEqual(expectedTotal, testReceipt.Total());
             Assert.AreEqual(expectedItemCount, testReceipt.ItemCount());
         }
-        [TestMethod]
-        public void BuyGroupPriceItemsGetsFullPriceIfLessThanGroup()
-        {
-            var testReceipt = SetupReceipt();
-            testReceipt.Buy("OysterCrackers",2);
-
-            decimal expectedTotal = 4.18m;
-            int expectedItemCount = 2;
-
-            Assert.AreEqual(expectedTotal, testReceipt.Total());
-            Assert.AreEqual(expectedItemCount, testReceipt.ItemCount());
-        }
+       
 
         [TestMethod]
         public void BuyGroupPriceItemsGetsDiscountedPriceAtGroupNumber()
@@ -339,7 +328,7 @@ namespace PillarGroceryStoreKata
             var testReceipt = SetupReceipt();
             testReceipt.Buy("OysterCrackers", 4);
 
-            decimal expectedTotal = 5m;
+            decimal expectedTotal = 6.68m;
             int expectedItemCount = 4;
 
             Assert.AreEqual(expectedTotal, testReceipt.Total());

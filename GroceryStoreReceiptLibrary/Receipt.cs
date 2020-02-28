@@ -103,12 +103,22 @@ namespace GroceryStoreReceiptLibrary
             {
                 return AdjustPriceForBuySomeGetDiscountSale(itemToBeBought);
             }
+            else if (itemToBeBought.GroupBuyingRequiredNumber != 0)
+            {
+                return AdjustPriceForGroupBuying(itemToBeBought);
+            }
             else
             {
-                return itemToBeBought.Price-itemToBeBought.PriceMarkDown;
+                return itemToBeBought.Price - itemToBeBought.PriceMarkDown;
             }
 
         }
+
+        private decimal AdjustPriceForGroupBuying(Item itemToBeBought)
+        {
+            return itemToBeBought.ReducedGroupItemCost;
+        }
+
 
         private decimal AdjustPriceForBuySomeGetDiscountSale(Item itemToBeBought)
         {

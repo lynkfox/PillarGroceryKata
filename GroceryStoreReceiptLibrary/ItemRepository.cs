@@ -84,6 +84,7 @@ namespace GroceryStoreReceiptLibrary
         {
             Items.Where(x => x.Name == itemName).First().GroupBuyingRequiredNumber = groupAmount;
             Items.Where(x => x.Name == itemName).First().GroupBuyGroupPrice = costForEntireGroup;
+            Items.Where(x => x.Name == itemName).First().ReducedGroupItemCost = costForEntireGroup / groupAmount;
         }
     }
 }
