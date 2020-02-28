@@ -48,7 +48,7 @@ namespace PillarGroceryStoreKata
 
             itemRepository.Add("GroundBeef", 1.99, 1);
 
-            Assert.AreEqual(expectedPrice, itemRepository.PriceCheck("TomatoSoup"));
+            Assert.AreEqual(expectedPrice, itemRepository.PriceCheck("GroundBeef"));
         }
 
         [TestMethod]
