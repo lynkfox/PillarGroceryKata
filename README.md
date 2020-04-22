@@ -61,12 +61,12 @@ The above 2 methods currently have no error handling. They may return Null or In
 
 
 # Build Test
-`````
+```
 dotnet build GroceryStoreReceiptLibrary/GroceryStoreReceiptLibrary.csproj
 dotnet build PillarGroceryStoreKata/PillarGroceryStoreKata.csproj
-````
+```
 
 # Run Tests
-````
+```
 dotnet vstest PillarGroceryStoreKata/bin/Debug/netcoreapp2.2/PillarGroceryStoreKata.dll
-````
+```
